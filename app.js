@@ -1,4 +1,6 @@
 const DATA = window.ORIGIN_INVINCIBLE_DATA;
+const RATING_OVERRIDE_KEY = "origin-invincible-rating-overrides-v1";
+const RATING_OVERRIDES = loadRatingOverrides();
 
 const SLOTS = [
   { key: "fullback", label: "Fullback" },
@@ -142,10 +144,9 @@ function chooseState(value) {
 }
 
 function resetGame() {
-  const selectedState = state.selectedState;
   Object.assign(state, {
-    selectedState,
-    phase: "draft",
+    selectedState: null,
+    phase: "choose",
     drafted: Array(SLOTS.length).fill(null),
     opponents: Array(SLOTS.length).fill(null),
     currentOffer: null,
@@ -162,6 +163,7 @@ function resetGame() {
     seriesStats: null,
     isAnimating: false
   });
+  document.body.className = "neutral";
   render();
 }
 
@@ -186,6 +188,7 @@ function renderStateChoice() {
       <div>
         <h1>Origin Invincible</h1>
         <p class="subtle">Pick your state, build an all-era Origin XIII, and try to win a three-game series without conceding a point.</p>
+        <a class="calibration-link" href="rating-calibration.html">Rating calibration</a>
       </div>
       <div class="state-grid">
         <button class="state-card qld-card" data-action="choose-state" data-state="QLD">
@@ -351,6 +354,7 @@ function renderCandidate(player) {
       </div>
       <div class="position-tags">
         ${player.positions.map((position) => `<span class="tag">${POSITION_LABELS[position]}</span>`).join("")}
+        ${getPlayerCoverPositions(player).map((position) => `<span class="tag cover">${POSITION_LABELS[position]} cover</span>`).join("")}
         ${player.isImmortal ? `<span class="tag immortal">Immortal</span>` : ""}
       </div>
       <div class="slot-buttons">
@@ -735,8 +739,12 @@ function rerollOffer() {
 
 function createPlayer(player, team) {
   const careerId = slug(player.name);
+  const override = applyStoredPlayerOverride(player, team, careerId);
   return {
     ...player,
+    positions: override.positions,
+    coverPositions: override.coverPositions,
+    ratings: override.ratings,
     id: `${team.state}-${team.year}-${careerId}-${team.immortal ? "immortal" : "origin"}`,
     careerId,
     state: team.state,
@@ -1240,7 +1248,7 @@ function getAvailableSlotsForPlayer(player) {
 
 function getPositionFit(player, slotKey) {
   if (player.positions.includes(slotKey)) return { canPick: true, level: "primary", penalty: 0, label: "Primary" };
-  if ((COVER_GROUPS[slotKey] || []).some((position) => player.positions.includes(position))) {
+  if (getPlayerCoverPositions(player).includes(slotKey)) {
     return { canPick: true, level: "cover", penalty: player.isImmortal ? 0 : 7, label: "Cover" };
   }
   return { canPick: false, level: "none", penalty: 99, label: "Unavailable" };
@@ -1373,6 +1381,69 @@ function ratingClass(value) {
   if (value >= 87) return "strong";
   if (value >= 82) return "good";
   return "solid";
+}
+
+function applyStoredPlayerOverride(player, team, careerId) {
+  const seasonKey = ratingSeasonKey(team.state, team.year, careerId);
+  const seasonOverride = RATING_OVERRIDES.seasons?.[seasonKey] || RATING_OVERRIDES[seasonKey];
+  const careerOverride = RATING_OVERRIDES.careers?.[careerId];
+  const next = { ...player.ratings };
+
+  if (seasonOverride) {
+    const source = seasonOverride.ratings || seasonOverride;
+    for (const key of ["overall", "attack", "defence", "workrate", "kicking", "goalKicking", "bigGame"]) {
+      if (Number.isFinite(Number(source[key]))) {
+        next[key] = clamp(Math.round(Number(source[key])), 1, 100);
+      }
+    }
+
+    if (Number.isFinite(Number(source.rating)) && !Number.isFinite(Number(source.overall))) {
+      next.overall = clamp(Math.round(Number(source.rating)), 1, 100);
+    }
+  }
+
+  const primaryOverride = Array.isArray(careerOverride?.positions)
+    ? careerOverride.positions.filter((position) => POSITION_LABELS[position])
+    : Array.isArray(seasonOverride?.positions)
+      ? seasonOverride.positions.filter((position) => POSITION_LABELS[position])
+      : [];
+  const positions = primaryOverride.length ? primaryOverride : player.positions || [];
+  const hasCoverPositions = Array.isArray(careerOverride?.coverPositions) || Array.isArray(player.coverPositions);
+  const coverOverride = Array.isArray(careerOverride?.coverPositions)
+    ? careerOverride.coverPositions.filter((position) => POSITION_LABELS[position] && !positions.includes(position))
+    : Array.isArray(player.coverPositions)
+      ? player.coverPositions.filter((position) => POSITION_LABELS[position] && !positions.includes(position))
+      : [];
+
+  return {
+    positions: [...new Set(positions)],
+    coverPositions: hasCoverPositions ? [...new Set(coverOverride)] : undefined,
+    ratings: next
+  };
+}
+
+function getPlayerCoverPositions(player) {
+  if (Array.isArray(player.coverPositions)) return player.coverPositions;
+  return deriveCoverPositions(player.positions || []);
+}
+
+function deriveCoverPositions(primaryPositions) {
+  return Object.keys(POSITION_LABELS).filter((slotKey) =>
+    !primaryPositions.includes(slotKey) &&
+    (COVER_GROUPS[slotKey] || []).some((position) => primaryPositions.includes(position))
+  );
+}
+
+function ratingSeasonKey(stateValue, year, careerId) {
+  return `${stateValue}-${year}-${careerId}`;
+}
+
+function loadRatingOverrides() {
+  try {
+    return JSON.parse(localStorage.getItem(RATING_OVERRIDE_KEY)) || {};
+  } catch {
+    return {};
+  }
 }
 
 function scrollToTop() {

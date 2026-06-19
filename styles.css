@@ -151,6 +151,20 @@ h1 {
   gap: 14px;
 }
 
+.calibration-link {
+  display: inline-flex;
+  margin-top: 12px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.calibration-link:hover {
+  color: var(--accent-2);
+}
+
 .state-card {
   min-height: 220px;
   padding: 22px;
@@ -443,6 +457,12 @@ h1 {
   color: #231700;
   background: var(--gold);
   border-color: var(--gold);
+}
+
+.tag.cover {
+  color: var(--accent-2);
+  border-color: color-mix(in srgb, var(--accent-2), transparent 55%);
+  background: rgba(255, 255, 255, .035);
 }
 
 .slot-buttons {

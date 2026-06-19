@@ -1,0 +1,2007 @@
+{
+  "exportedAt": "2026-06-19T08:39:58.638Z",
+  "storageKey": "origin-invincible-rating-overrides-v1",
+  "count": 45,
+  "seasons": {
+    "QLD-1990-gary-belcher": {
+      "seasonKey": "QLD-1990-gary-belcher",
+      "careerId": "gary-belcher",
+      "name": "Gary Belcher",
+      "state": "QLD",
+      "year": 1990,
+      "baseRatings": {
+        "overall": 89,
+        "attack": 96,
+        "defence": 87,
+        "workrate": 91,
+        "kicking": 79,
+        "goalKicking": 78,
+        "bigGame": 94
+      },
+      "ratings": {
+        "overall": 91,
+        "attack": 98,
+        "defence": 89,
+        "workrate": 93,
+        "kicking": 81,
+        "goalKicking": 78,
+        "bigGame": 96
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:32:43.612Z"
+    },
+    "QLD-2006-carl-webb": {
+      "seasonKey": "QLD-2006-carl-webb",
+      "careerId": "carl-webb",
+      "name": "Carl Webb",
+      "state": "QLD",
+      "year": 2006,
+      "baseRatings": {
+        "overall": 86,
+        "attack": 86,
+        "defence": 90,
+        "workrate": 93,
+        "kicking": 24,
+        "goalKicking": 12,
+        "bigGame": 90
+      },
+      "ratings": {
+        "overall": 88,
+        "attack": 88,
+        "defence": 92,
+        "workrate": 95,
+        "kicking": 26,
+        "goalKicking": 12,
+        "bigGame": 92
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:32:54.004Z"
+    },
+    "NSW-2022-cameron-murray": {
+      "seasonKey": "NSW-2022-cameron-murray",
+      "careerId": "cameron-murray",
+      "name": "Cameron Murray",
+      "state": "NSW",
+      "year": 2022,
+      "baseRatings": {
+        "overall": 85,
+        "attack": 85,
+        "defence": 89,
+        "workrate": 92,
+        "kicking": 24,
+        "goalKicking": 12,
+        "bigGame": 90
+      },
+      "ratings": {
+        "overall": 91,
+        "attack": 91,
+        "defence": 95,
+        "workrate": 98,
+        "kicking": 30,
+        "goalKicking": 12,
+        "bigGame": 96
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:32:59.868Z"
+    },
+    "QLD-1996-steve-renouf": {
+      "seasonKey": "QLD-1996-steve-renouf",
+      "careerId": "steve-renouf",
+      "name": "Steve Renouf",
+      "state": "QLD",
+      "year": 1996,
+      "baseRatings": {
+        "overall": 87,
+        "attack": 94,
+        "defence": 85,
+        "workrate": 88,
+        "kicking": 24,
+        "goalKicking": 22,
+        "bigGame": 93
+      },
+      "ratings": {
+        "overall": 95,
+        "attack": 100,
+        "defence": 93,
+        "workrate": 96,
+        "kicking": 32,
+        "goalKicking": 22,
+        "bigGame": 100
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:33:06.516Z"
+    },
+    "NSW-2018-damien-cook": {
+      "seasonKey": "NSW-2018-damien-cook",
+      "careerId": "damien-cook",
+      "name": "Damien Cook",
+      "state": "NSW",
+      "year": 2018,
+      "baseRatings": {
+        "overall": 89,
+        "attack": 91,
+        "defence": 92,
+        "workrate": 95,
+        "kicking": 79,
+        "goalKicking": 12,
+        "bigGame": 94
+      },
+      "ratings": {
+        "overall": 91,
+        "attack": 93,
+        "defence": 94,
+        "workrate": 97,
+        "kicking": 81,
+        "goalKicking": 12,
+        "bigGame": 96
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:33:17.468Z"
+    },
+    "NSW-2023-josh-addo-carr": {
+      "seasonKey": "NSW-2023-josh-addo-carr",
+      "careerId": "josh-addo-carr",
+      "name": "Josh Addo-Carr",
+      "state": "NSW",
+      "year": 2023,
+      "baseRatings": {
+        "overall": 87,
+        "attack": 94,
+        "defence": 85,
+        "workrate": 89,
+        "kicking": 24,
+        "goalKicking": 22,
+        "bigGame": 92
+      },
+      "ratings": {
+        "overall": 91,
+        "attack": 98,
+        "defence": 89,
+        "workrate": 93,
+        "kicking": 28,
+        "goalKicking": 22,
+        "bigGame": 96
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:33:20.996Z"
+    },
+    "QLD-2015-corey-parker": {
+      "seasonKey": "QLD-2015-corey-parker",
+      "careerId": "corey-parker",
+      "name": "Corey Parker",
+      "state": "QLD",
+      "year": 2015,
+      "baseRatings": {
+        "overall": 88,
+        "attack": 87,
+        "defence": 92,
+        "workrate": 95,
+        "kicking": 24,
+        "goalKicking": 12,
+        "bigGame": 94
+      },
+      "ratings": {
+        "overall": 90,
+        "attack": 89,
+        "defence": 94,
+        "workrate": 97,
+        "kicking": 26,
+        "goalKicking": 12,
+        "bigGame": 96
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:34:07.828Z"
+    },
+    "QLD-2024-xavier-coates": {
+      "seasonKey": "QLD-2024-xavier-coates",
+      "careerId": "xavier-coates",
+      "name": "Xavier Coates",
+      "state": "QLD",
+      "year": 2024,
+      "baseRatings": {
+        "overall": 82,
+        "attack": 89,
+        "defence": 80,
+        "workrate": 84,
+        "kicking": 24,
+        "goalKicking": 22,
+        "bigGame": 85
+      },
+      "ratings": {
+        "overall": 88,
+        "attack": 95,
+        "defence": 86,
+        "workrate": 90,
+        "kicking": 30,
+        "goalKicking": 22,
+        "bigGame": 91
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:34:25.564Z"
+    },
+    "QLD-2002-andrew-gee": {
+      "seasonKey": "QLD-2002-andrew-gee",
+      "careerId": "andrew-gee",
+      "name": "Andrew GEE",
+      "state": "QLD",
+      "year": 2002,
+      "baseRatings": {
+        "overall": 80,
+        "attack": 79,
+        "defence": 84,
+        "workrate": 87,
+        "kicking": 24,
+        "goalKicking": 12,
+        "bigGame": 85
+      },
+      "ratings": {
+        "overall": 84,
+        "attack": 83,
+        "defence": 88,
+        "workrate": 91,
+        "kicking": 28,
+        "goalKicking": 12,
+        "bigGame": 89
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:34:34.044Z"
+    },
+    "QLD-1999-tonie-carroll": {
+      "seasonKey": "QLD-1999-tonie-carroll",
+      "careerId": "tonie-carroll",
+      "name": "Tonie Carroll",
+      "state": "QLD",
+      "year": 1999,
+      "baseRatings": {
+        "overall": 82,
+        "attack": 88,
+        "defence": 80,
+        "workrate": 84,
+        "kicking": 24,
+        "goalKicking": 22,
+        "bigGame": 88
+      },
+      "ratings": {
+        "overall": 86,
+        "attack": 92,
+        "defence": 84,
+        "workrate": 88,
+        "kicking": 28,
+        "goalKicking": 22,
+        "bigGame": 92
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:34:39.044Z"
+    },
+    "NSW-2016-josh-jackson": {
+      "seasonKey": "NSW-2016-josh-jackson",
+      "careerId": "josh-jackson",
+      "name": "Josh Jackson",
+      "state": "NSW",
+      "year": 2016,
+      "baseRatings": {
+        "overall": 81,
+        "attack": 80,
+        "defence": 85,
+        "workrate": 87,
+        "kicking": 24,
+        "goalKicking": 12,
+        "bigGame": 84
+      },
+      "ratings": {
+        "overall": 89,
+        "attack": 88,
+        "defence": 93,
+        "workrate": 95,
+        "kicking": 32,
+        "goalKicking": 12,
+        "bigGame": 92
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:34:43.260Z"
+    },
+    "QLD-1990-trevor-gillmeister": {
+      "seasonKey": "QLD-1990-trevor-gillmeister",
+      "careerId": "trevor-gillmeister",
+      "name": "Trevor Gillmeister",
+      "state": "QLD",
+      "year": 1990,
+      "baseRatings": {
+        "overall": 82,
+        "attack": 81,
+        "defence": 86,
+        "workrate": 90,
+        "kicking": 24,
+        "goalKicking": 12,
+        "bigGame": 89
+      },
+      "ratings": {
+        "overall": 92,
+        "attack": 91,
+        "defence": 99,
+        "workrate": 100,
+        "kicking": 34,
+        "goalKicking": 12,
+        "bigGame": 99
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:34:53.933Z"
+    },
+    "NSW-1983-peter-sterling": {
+      "seasonKey": "NSW-1983-peter-sterling",
+      "careerId": "peter-sterling",
+      "name": "Peter Sterling",
+      "state": "NSW",
+      "year": 1983,
+      "baseRatings": {
+        "overall": 84,
+        "attack": 89,
+        "defence": 84,
+        "workrate": 86,
+        "kicking": 90,
+        "goalKicking": 55,
+        "bigGame": 90
+      },
+      "ratings": {
+        "overall": 94,
+        "attack": 99,
+        "defence": 94,
+        "workrate": 96,
+        "kicking": 100,
+        "goalKicking": 55,
+        "bigGame": 100
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:35:03.876Z"
+    },
+    "NSW-2012-luke-lewis": {
+      "seasonKey": "NSW-2012-luke-lewis",
+      "careerId": "luke-lewis",
+      "name": "Luke Lewis",
+      "state": "NSW",
+      "year": 2012,
+      "baseRatings": {
+        "overall": 81,
+        "attack": 80,
+        "defence": 85,
+        "workrate": 88,
+        "kicking": 24,
+        "goalKicking": 12,
+        "bigGame": 86
+      },
+      "ratings": {
+        "overall": 85,
+        "attack": 84,
+        "defence": 89,
+        "workrate": 92,
+        "kicking": 28,
+        "goalKicking": 12,
+        "bigGame": 90
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:35:14.540Z"
+    },
+    "QLD-1999-steve-price": {
+      "seasonKey": "QLD-1999-steve-price",
+      "careerId": "steve-price",
+      "name": "Steve Price",
+      "state": "QLD",
+      "year": 1999,
+      "baseRatings": {
+        "overall": 84,
+        "attack": 83,
+        "defence": 88,
+        "workrate": 93,
+        "kicking": 24,
+        "goalKicking": 12,
+        "bigGame": 92
+      },
+      "ratings": {
+        "overall": 88,
+        "attack": 87,
+        "defence": 92,
+        "workrate": 97,
+        "kicking": 28,
+        "goalKicking": 12,
+        "bigGame": 96
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:35:23.932Z"
+    },
+    "QLD-2019-corey-oates": {
+      "seasonKey": "QLD-2019-corey-oates",
+      "careerId": "corey-oates",
+      "name": "Corey Oates",
+      "state": "QLD",
+      "year": 2019,
+      "baseRatings": {
+        "overall": 83,
+        "attack": 90,
+        "defence": 81,
+        "workrate": 84,
+        "kicking": 24,
+        "goalKicking": 22,
+        "bigGame": 86
+      },
+      "ratings": {
+        "overall": 87,
+        "attack": 94,
+        "defence": 85,
+        "workrate": 88,
+        "kicking": 28,
+        "goalKicking": 22,
+        "bigGame": 90
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:35:36.652Z"
+    },
+    "NSW-2026-ethan-strange": {
+      "seasonKey": "NSW-2026-ethan-strange",
+      "careerId": "ethan-strange",
+      "name": "Ethan Strange",
+      "state": "NSW",
+      "year": 2026,
+      "baseRatings": {
+        "overall": 75,
+        "attack": 81,
+        "defence": 75,
+        "workrate": 75,
+        "kicking": 81,
+        "goalKicking": 55,
+        "bigGame": 76
+      },
+      "ratings": {
+        "overall": 85,
+        "attack": 91,
+        "defence": 85,
+        "workrate": 85,
+        "kicking": 91,
+        "goalKicking": 55,
+        "bigGame": 86
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:36:21.836Z"
+    },
+    "QLD-1990-sam-backo": {
+      "seasonKey": "QLD-1990-sam-backo",
+      "careerId": "sam-backo",
+      "name": "Sam Backo",
+      "state": "QLD",
+      "year": 1990,
+      "baseRatings": {
+        "overall": 78,
+        "attack": 77,
+        "defence": 82,
+        "workrate": 84,
+        "kicking": 24,
+        "goalKicking": 12,
+        "bigGame": 80
+      },
+      "ratings": {
+        "overall": 80,
+        "attack": 79,
+        "defence": 84,
+        "workrate": 86,
+        "kicking": 26,
+        "goalKicking": 12,
+        "bigGame": 82
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:36:26.428Z"
+    },
+    "NSW-2026-payne-haas": {
+      "seasonKey": "NSW-2026-payne-haas",
+      "careerId": "payne-haas",
+      "name": "Payne Haas",
+      "state": "NSW",
+      "year": 2026,
+      "baseRatings": {
+        "overall": 77,
+        "attack": 76,
+        "defence": 81,
+        "workrate": 84,
+        "kicking": 24,
+        "goalKicking": 12,
+        "bigGame": 82
+      },
+      "ratings": {
+        "overall": 91,
+        "attack": 90,
+        "defence": 95,
+        "workrate": 98,
+        "kicking": 38,
+        "goalKicking": 12,
+        "bigGame": 96
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:36:35.020Z"
+    },
+    "NSW-1998-matthew-johns": {
+      "seasonKey": "NSW-1998-matthew-johns",
+      "careerId": "matthew-johns",
+      "name": "Matthew Johns",
+      "state": "NSW",
+      "year": 1998,
+      "baseRatings": {
+        "overall": 74,
+        "attack": 76,
+        "defence": 77,
+        "workrate": 79,
+        "kicking": 64,
+        "goalKicking": 12,
+        "bigGame": 75
+      },
+      "ratings": {
+        "overall": 84,
+        "attack": 86,
+        "defence": 87,
+        "workrate": 89,
+        "kicking": 74,
+        "goalKicking": 12,
+        "bigGame": 85
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:36:43.484Z"
+    },
+    "NSW-2009-glenn-stewart": {
+      "seasonKey": "NSW-2009-glenn-stewart",
+      "careerId": "glenn-stewart",
+      "name": "Glenn Stewart",
+      "state": "NSW",
+      "year": 2009,
+      "baseRatings": {
+        "overall": 72,
+        "attack": 71,
+        "defence": 76,
+        "workrate": 78,
+        "kicking": 24,
+        "goalKicking": 12,
+        "bigGame": 73
+      },
+      "ratings": {
+        "overall": 86,
+        "attack": 85,
+        "defence": 90,
+        "workrate": 92,
+        "kicking": 38,
+        "goalKicking": 12,
+        "bigGame": 87
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:36:48.084Z"
+    },
+    "QLD-1990-willie-carne": {
+      "seasonKey": "QLD-1990-willie-carne",
+      "careerId": "willie-carne",
+      "name": "Willie Carne",
+      "state": "QLD",
+      "year": 1990,
+      "baseRatings": {
+        "overall": 76,
+        "attack": 82,
+        "defence": 74,
+        "workrate": 78,
+        "kicking": 24,
+        "goalKicking": 86,
+        "bigGame": 79
+      },
+      "ratings": {
+        "overall": 86,
+        "attack": 92,
+        "defence": 84,
+        "workrate": 88,
+        "kicking": 34,
+        "goalKicking": 86,
+        "bigGame": 89
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:36:54.436Z"
+    },
+    "QLD-2021-thomas-flegler": {
+      "seasonKey": "QLD-2021-thomas-flegler",
+      "careerId": "thomas-flegler",
+      "name": "Thomas Flegler",
+      "state": "QLD",
+      "year": 2021,
+      "baseRatings": {
+        "overall": 69,
+        "attack": 68,
+        "defence": 73,
+        "workrate": 75,
+        "kicking": 24,
+        "goalKicking": 12,
+        "bigGame": 70
+      },
+      "ratings": {
+        "overall": 85,
+        "attack": 84,
+        "defence": 89,
+        "workrate": 91,
+        "kicking": 40,
+        "goalKicking": 12,
+        "bigGame": 86
+      },
+      "notes": "",
+      "updatedAt": "2026-06-19T08:37:07.316Z"
+    }
+  },
+  "careers": {
+    "laurie-daley": {
+      "careerId": "laurie-daley",
+      "name": "Laurie Daley",
+      "basePositions": [
+        "half",
+        "centre"
+      ],
+      "baseCoverPositions": [
+        "fullback",
+        "wing"
+      ],
+      "positions": [
+        "centre",
+        "half"
+      ],
+      "coverPositions": [],
+      "updatedAt": "2026-06-19T08:31:10.324Z"
+    },
+    "james-tedesco": {
+      "careerId": "james-tedesco",
+      "name": "James Tedesco",
+      "basePositions": [
+        "fullback"
+      ],
+      "baseCoverPositions": [
+        "wing",
+        "centre"
+      ],
+      "positions": [
+        "fullback"
+      ],
+      "coverPositions": [],
+      "updatedAt": "2026-06-19T08:31:26.420Z"
+    },
+    "brad-fittler": {
+      "careerId": "brad-fittler",
+      "name": "Brad Fittler",
+      "basePositions": [
+        "half"
+      ],
+      "baseCoverPositions": [],
+      "positions": [
+        "half"
+      ],
+      "coverPositions": [
+        "centre"
+      ],
+      "updatedAt": "2026-06-19T08:31:33.092Z"
+    },
+    "steve-price": {
+      "careerId": "steve-price",
+      "name": "Steve Price",
+      "basePositions": [
+        "middle"
+      ],
+      "baseCoverPositions": [
+        "edge",
+        "lock"
+      ],
+      "positions": [
+        "middle"
+      ],
+      "coverPositions": [
+        "lock"
+      ],
+      "updatedAt": "2026-06-19T08:31:51.900Z"
+    },
+    "anthony-minichiello": {
+      "careerId": "anthony-minichiello",
+      "name": "Anthony Minichiello",
+      "basePositions": [
+        "fullback"
+      ],
+      "baseCoverPositions": [
+        "wing",
+        "centre"
+      ],
+      "positions": [
+        "fullback"
+      ],
+      "coverPositions": [
+        "wing"
+      ],
+      "updatedAt": "2026-06-19T08:31:57.476Z"
+    },
+    "matt-sing": {
+      "careerId": "matt-sing",
+      "name": "Matt Sing",
+      "basePositions": [
+        "wing"
+      ],
+      "baseCoverPositions": [
+        "fullback",
+        "centre"
+      ],
+      "positions": [
+        "wing"
+      ],
+      "coverPositions": [],
+      "updatedAt": "2026-06-19T08:32:10.180Z"
+    },
+    "bryan-fletcher": {
+      "careerId": "bryan-fletcher",
+      "name": "Bryan Fletcher",
+      "basePositions": [
+        "edge"
+      ],
+      "baseCoverPositions": [
+        "middle",
+        "lock"
+      ],
+      "positions": [
+        "edge"
+      ],
+      "coverPositions": [
+        "lock"
+      ],
+      "updatedAt": "2026-06-19T08:32:15.988Z"
+    },
+    "brian-to-o": {
+      "careerId": "brian-to-o",
+      "name": "Brian To'o",
+      "basePositions": [
+        "wing"
+      ],
+      "baseCoverPositions": [
+        "fullback",
+        "centre"
+      ],
+      "positions": [
+        "wing"
+      ],
+      "coverPositions": [],
+      "updatedAt": "2026-06-19T08:32:22.052Z"
+    },
+    "josh-addo-carr": {
+      "careerId": "josh-addo-carr",
+      "name": "Josh Addo-Carr",
+      "basePositions": [
+        "wing"
+      ],
+      "baseCoverPositions": [
+        "fullback",
+        "centre"
+      ],
+      "positions": [
+        "wing"
+      ],
+      "coverPositions": [],
+      "updatedAt": "2026-06-19T08:32:24.596Z"
+    },
+    "will-chambers": {
+      "careerId": "will-chambers",
+      "name": "Will Chambers",
+      "basePositions": [
+        "centre"
+      ],
+      "baseCoverPositions": [
+        "fullback",
+        "wing"
+      ],
+      "positions": [
+        "centre"
+      ],
+      "coverPositions": [
+        "wing"
+      ],
+      "updatedAt": "2026-06-19T08:32:30.396Z"
+    },
+    "gary-belcher": {
+      "careerId": "gary-belcher",
+      "name": "Gary Belcher",
+      "basePositions": [
+        "fullback"
+      ],
+      "baseCoverPositions": [
+        "wing",
+        "centre"
+      ],
+      "positions": [
+        "fullback"
+      ],
+      "coverPositions": [],
+      "updatedAt": "2026-06-19T08:32:42.252Z"
+    },
+    "steve-renouf": {
+      "careerId": "steve-renouf",
+      "name": "Steve Renouf",
+      "basePositions": [
+        "centre"
+      ],
+      "baseCoverPositions": [
+        "fullback",
+        "wing"
+      ],
+      "positions": [
+        "centre"
+      ],
+      "coverPositions": [],
+      "updatedAt": "2026-06-19T08:33:03.595Z"
+    },
+    "darren-smith": {
+      "careerId": "darren-smith",
+      "name": "Darren Smith",
+      "basePositions": [
+        "lock",
+        "centre"
+      ],
+      "baseCoverPositions": [
+        "fullback",
+        "wing",
+        "edge",
+        "middle"
+      ],
+      "positions": [
+        "centre",
+        "lock"
+      ],
+      "coverPositions": [
+        "edge"
+      ],
+      "updatedAt": "2026-06-19T08:33:40.748Z"
+    },
+    "tonie-carroll": {
+      "careerId": "tonie-carroll",
+      "name": "Tonie Carroll",
+      "basePositions": [
+        "edge"
+      ],
+      "baseCoverPositions": [
+        "middle",
+        "lock"
+      ],
+      "positions": [
+        "edge"
+      ],
+      "coverPositions": [
+        "centre",
+        "lock"
+      ],
+      "updatedAt": "2026-06-19T08:33:48.292Z"
+    },
+    "paul-bowman": {
+      "careerId": "paul-bowman",
+      "name": "Paul Bowman",
+      "basePositions": [
+        "centre"
+      ],
+      "baseCoverPositions": [
+        "fullback",
+        "wing"
+      ],
+      "positions": [
+        "centre"
+      ],
+      "coverPositions": [
+        "wing"
+      ],
+      "updatedAt": "2026-06-19T08:34:20.460Z"
+    },
+    "luke-lewis": {
+      "careerId": "luke-lewis",
+      "name": "Luke Lewis",
+      "basePositions": [
+        "edge"
+      ],
+      "baseCoverPositions": [
+        "middle",
+        "lock"
+      ],
+      "positions": [
+        "edge"
+      ],
+      "coverPositions": [
+        "centre",
+        "lock"
+      ],
+      "updatedAt": "2026-06-19T08:35:13.091Z"
+    },
+    "mark-mcgaw": {
+      "careerId": "mark-mcgaw",
+      "name": "Mark McGaw",
+      "basePositions": [
+        "centre"
+      ],
+      "baseCoverPositions": [
+        "fullback",
+        "wing"
+      ],
+      "positions": [
+        "centre"
+      ],
+      "coverPositions": [
+        "wing"
+      ],
+      "updatedAt": "2026-06-19T08:35:30.772Z"
+    },
+    "brad-mackay": {
+      "careerId": "brad-mackay",
+      "name": "Brad Mackay",
+      "basePositions": [
+        "lock",
+        "centre",
+        "edge",
+        "half"
+      ],
+      "baseCoverPositions": [
+        "fullback",
+        "wing",
+        "middle"
+      ],
+      "positions": [
+        "centre",
+        "edge",
+        "lock"
+      ],
+      "coverPositions": [
+        "middle"
+      ],
+      "updatedAt": "2026-06-19T08:35:46.020Z"
+    },
+    "payne-haas": {
+      "careerId": "payne-haas",
+      "name": "Payne Haas",
+      "basePositions": [
+        "middle"
+      ],
+      "baseCoverPositions": [
+        "edge",
+        "lock"
+      ],
+      "positions": [
+        "middle"
+      ],
+      "coverPositions": [],
+      "updatedAt": "2026-06-19T08:36:30.604Z"
+    },
+    "matthew-johns": {
+      "careerId": "matthew-johns",
+      "name": "Matthew Johns",
+      "basePositions": [
+        "hooker"
+      ],
+      "baseCoverPositions": [],
+      "positions": [
+        "half"
+      ],
+      "coverPositions": [],
+      "updatedAt": "2026-06-19T08:36:40.644Z"
+    },
+    "willie-carne": {
+      "careerId": "willie-carne",
+      "name": "Willie Carne",
+      "basePositions": [
+        "wing"
+      ],
+      "baseCoverPositions": [
+        "fullback",
+        "centre"
+      ],
+      "positions": [
+        "wing"
+      ],
+      "coverPositions": [],
+      "updatedAt": "2026-06-19T08:36:52.556Z"
+    },
+    "dylan-lucas": {
+      "careerId": "dylan-lucas",
+      "name": "Dylan Lucas",
+      "basePositions": [
+        "edge"
+      ],
+      "baseCoverPositions": [
+        "middle",
+        "lock"
+      ],
+      "positions": [
+        "edge"
+      ],
+      "coverPositions": [
+        "centre",
+        "lock"
+      ],
+      "updatedAt": "2026-06-19T08:37:02.020Z"
+    }
+  },
+  "rows": [
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "anthony-minichiello",
+      "name": "Anthony Minichiello",
+      "state": "All",
+      "year": "All",
+      "basePositions": "fullback",
+      "positions": "fullback",
+      "baseCoverPositions": "wing/centre",
+      "coverPositions": "wing",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "brad-fittler",
+      "name": "Brad Fittler",
+      "state": "All",
+      "year": "All",
+      "basePositions": "half",
+      "positions": "half",
+      "baseCoverPositions": "",
+      "coverPositions": "centre",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "brad-mackay",
+      "name": "Brad Mackay",
+      "state": "All",
+      "year": "All",
+      "basePositions": "lock/centre/edge/half",
+      "positions": "centre/edge/lock",
+      "baseCoverPositions": "fullback/wing/middle",
+      "coverPositions": "middle",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "brian-to-o",
+      "name": "Brian To'o",
+      "state": "All",
+      "year": "All",
+      "basePositions": "wing",
+      "positions": "wing",
+      "baseCoverPositions": "fullback/centre",
+      "coverPositions": "",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "bryan-fletcher",
+      "name": "Bryan Fletcher",
+      "state": "All",
+      "year": "All",
+      "basePositions": "edge",
+      "positions": "edge",
+      "baseCoverPositions": "middle/lock",
+      "coverPositions": "lock",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "darren-smith",
+      "name": "Darren Smith",
+      "state": "All",
+      "year": "All",
+      "basePositions": "lock/centre",
+      "positions": "centre/lock",
+      "baseCoverPositions": "fullback/wing/edge/middle",
+      "coverPositions": "edge",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "dylan-lucas",
+      "name": "Dylan Lucas",
+      "state": "All",
+      "year": "All",
+      "basePositions": "edge",
+      "positions": "edge",
+      "baseCoverPositions": "middle/lock",
+      "coverPositions": "centre/lock",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "gary-belcher",
+      "name": "Gary Belcher",
+      "state": "All",
+      "year": "All",
+      "basePositions": "fullback",
+      "positions": "fullback",
+      "baseCoverPositions": "wing/centre",
+      "coverPositions": "",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "james-tedesco",
+      "name": "James Tedesco",
+      "state": "All",
+      "year": "All",
+      "basePositions": "fullback",
+      "positions": "fullback",
+      "baseCoverPositions": "wing/centre",
+      "coverPositions": "",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "josh-addo-carr",
+      "name": "Josh Addo-Carr",
+      "state": "All",
+      "year": "All",
+      "basePositions": "wing",
+      "positions": "wing",
+      "baseCoverPositions": "fullback/centre",
+      "coverPositions": "",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "laurie-daley",
+      "name": "Laurie Daley",
+      "state": "All",
+      "year": "All",
+      "basePositions": "half/centre",
+      "positions": "centre/half",
+      "baseCoverPositions": "fullback/wing",
+      "coverPositions": "",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "luke-lewis",
+      "name": "Luke Lewis",
+      "state": "All",
+      "year": "All",
+      "basePositions": "edge",
+      "positions": "edge",
+      "baseCoverPositions": "middle/lock",
+      "coverPositions": "centre/lock",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "mark-mcgaw",
+      "name": "Mark McGaw",
+      "state": "All",
+      "year": "All",
+      "basePositions": "centre",
+      "positions": "centre",
+      "baseCoverPositions": "fullback/wing",
+      "coverPositions": "wing",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "matt-sing",
+      "name": "Matt Sing",
+      "state": "All",
+      "year": "All",
+      "basePositions": "wing",
+      "positions": "wing",
+      "baseCoverPositions": "fullback/centre",
+      "coverPositions": "",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "matthew-johns",
+      "name": "Matthew Johns",
+      "state": "All",
+      "year": "All",
+      "basePositions": "hooker",
+      "positions": "half",
+      "baseCoverPositions": "",
+      "coverPositions": "",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "paul-bowman",
+      "name": "Paul Bowman",
+      "state": "All",
+      "year": "All",
+      "basePositions": "centre",
+      "positions": "centre",
+      "baseCoverPositions": "fullback/wing",
+      "coverPositions": "wing",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "payne-haas",
+      "name": "Payne Haas",
+      "state": "All",
+      "year": "All",
+      "basePositions": "middle",
+      "positions": "middle",
+      "baseCoverPositions": "edge/lock",
+      "coverPositions": "",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "steve-price",
+      "name": "Steve Price",
+      "state": "All",
+      "year": "All",
+      "basePositions": "middle",
+      "positions": "middle",
+      "baseCoverPositions": "edge/lock",
+      "coverPositions": "lock",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "steve-renouf",
+      "name": "Steve Renouf",
+      "state": "All",
+      "year": "All",
+      "basePositions": "centre",
+      "positions": "centre",
+      "baseCoverPositions": "fullback/wing",
+      "coverPositions": "",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "tonie-carroll",
+      "name": "Tonie Carroll",
+      "state": "All",
+      "year": "All",
+      "basePositions": "edge",
+      "positions": "edge",
+      "baseCoverPositions": "middle/lock",
+      "coverPositions": "centre/lock",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "will-chambers",
+      "name": "Will Chambers",
+      "state": "All",
+      "year": "All",
+      "basePositions": "centre",
+      "positions": "centre",
+      "baseCoverPositions": "fullback/wing",
+      "coverPositions": "wing",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "positions",
+      "seasonKey": "",
+      "careerId": "willie-carne",
+      "name": "Willie Carne",
+      "state": "All",
+      "year": "All",
+      "basePositions": "wing",
+      "positions": "wing",
+      "baseCoverPositions": "fullback/centre",
+      "coverPositions": "",
+      "baseOverall": "",
+      "overall": "",
+      "delta": "",
+      "attack": "",
+      "defence": "",
+      "workrate": "",
+      "kicking": "",
+      "goalKicking": "",
+      "bigGame": "",
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "QLD-2021-thomas-flegler",
+      "careerId": "thomas-flegler",
+      "name": "Thomas Flegler",
+      "state": "QLD",
+      "year": 2021,
+      "basePositions": "middle",
+      "positions": "middle",
+      "baseCoverPositions": "edge/lock",
+      "coverPositions": "edge/lock",
+      "baseOverall": 69,
+      "overall": 85,
+      "delta": 16,
+      "attack": 84,
+      "defence": 89,
+      "workrate": 91,
+      "kicking": 40,
+      "goalKicking": 12,
+      "bigGame": 86,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "NSW-2026-payne-haas",
+      "careerId": "payne-haas",
+      "name": "Payne Haas",
+      "state": "NSW",
+      "year": 2026,
+      "basePositions": "middle",
+      "positions": "middle",
+      "baseCoverPositions": "edge/lock",
+      "coverPositions": "",
+      "baseOverall": 77,
+      "overall": 91,
+      "delta": 14,
+      "attack": 90,
+      "defence": 95,
+      "workrate": 98,
+      "kicking": 38,
+      "goalKicking": 12,
+      "bigGame": 96,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "NSW-2009-glenn-stewart",
+      "careerId": "glenn-stewart",
+      "name": "Glenn Stewart",
+      "state": "NSW",
+      "year": 2009,
+      "basePositions": "edge",
+      "positions": "edge",
+      "baseCoverPositions": "middle/lock",
+      "coverPositions": "middle/lock",
+      "baseOverall": 72,
+      "overall": 86,
+      "delta": 14,
+      "attack": 85,
+      "defence": 90,
+      "workrate": 92,
+      "kicking": 38,
+      "goalKicking": 12,
+      "bigGame": 87,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "NSW-2026-ethan-strange",
+      "careerId": "ethan-strange",
+      "name": "Ethan Strange",
+      "state": "NSW",
+      "year": 2026,
+      "basePositions": "half",
+      "positions": "half",
+      "baseCoverPositions": "",
+      "coverPositions": "",
+      "baseOverall": 75,
+      "overall": 85,
+      "delta": 10,
+      "attack": 91,
+      "defence": 85,
+      "workrate": 85,
+      "kicking": 91,
+      "goalKicking": 55,
+      "bigGame": 86,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "NSW-1998-matthew-johns",
+      "careerId": "matthew-johns",
+      "name": "Matthew Johns",
+      "state": "NSW",
+      "year": 1998,
+      "basePositions": "hooker",
+      "positions": "half",
+      "baseCoverPositions": "",
+      "coverPositions": "",
+      "baseOverall": 74,
+      "overall": 84,
+      "delta": 10,
+      "attack": 86,
+      "defence": 87,
+      "workrate": 89,
+      "kicking": 74,
+      "goalKicking": 12,
+      "bigGame": 85,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "QLD-1990-trevor-gillmeister",
+      "careerId": "trevor-gillmeister",
+      "name": "Trevor Gillmeister",
+      "state": "QLD",
+      "year": 1990,
+      "basePositions": "edge",
+      "positions": "edge",
+      "baseCoverPositions": "middle/lock",
+      "coverPositions": "middle/lock",
+      "baseOverall": 82,
+      "overall": 92,
+      "delta": 10,
+      "attack": 91,
+      "defence": 99,
+      "workrate": 100,
+      "kicking": 34,
+      "goalKicking": 12,
+      "bigGame": 99,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "QLD-1990-willie-carne",
+      "careerId": "willie-carne",
+      "name": "Willie Carne",
+      "state": "QLD",
+      "year": 1990,
+      "basePositions": "wing",
+      "positions": "wing",
+      "baseCoverPositions": "fullback/centre",
+      "coverPositions": "",
+      "baseOverall": 76,
+      "overall": 86,
+      "delta": 10,
+      "attack": 92,
+      "defence": 84,
+      "workrate": 88,
+      "kicking": 34,
+      "goalKicking": 86,
+      "bigGame": 89,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "NSW-1983-peter-sterling",
+      "careerId": "peter-sterling",
+      "name": "Peter Sterling",
+      "state": "NSW",
+      "year": 1983,
+      "basePositions": "half",
+      "positions": "half",
+      "baseCoverPositions": "",
+      "coverPositions": "",
+      "baseOverall": 84,
+      "overall": 94,
+      "delta": 10,
+      "attack": 99,
+      "defence": 94,
+      "workrate": 96,
+      "kicking": 100,
+      "goalKicking": 55,
+      "bigGame": 100,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "NSW-2016-josh-jackson",
+      "careerId": "josh-jackson",
+      "name": "Josh Jackson",
+      "state": "NSW",
+      "year": 2016,
+      "basePositions": "edge",
+      "positions": "edge",
+      "baseCoverPositions": "middle/lock",
+      "coverPositions": "middle/lock",
+      "baseOverall": 81,
+      "overall": 89,
+      "delta": 8,
+      "attack": 88,
+      "defence": 93,
+      "workrate": 95,
+      "kicking": 32,
+      "goalKicking": 12,
+      "bigGame": 92,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "QLD-1996-steve-renouf",
+      "careerId": "steve-renouf",
+      "name": "Steve Renouf",
+      "state": "QLD",
+      "year": 1996,
+      "basePositions": "centre",
+      "positions": "centre",
+      "baseCoverPositions": "fullback/wing",
+      "coverPositions": "",
+      "baseOverall": 87,
+      "overall": 95,
+      "delta": 8,
+      "attack": 100,
+      "defence": 93,
+      "workrate": 96,
+      "kicking": 32,
+      "goalKicking": 22,
+      "bigGame": 100,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "QLD-2024-xavier-coates",
+      "careerId": "xavier-coates",
+      "name": "Xavier Coates",
+      "state": "QLD",
+      "year": 2024,
+      "basePositions": "wing",
+      "positions": "wing",
+      "baseCoverPositions": "",
+      "coverPositions": "",
+      "baseOverall": 82,
+      "overall": 88,
+      "delta": 6,
+      "attack": 95,
+      "defence": 86,
+      "workrate": 90,
+      "kicking": 30,
+      "goalKicking": 22,
+      "bigGame": 91,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "NSW-2022-cameron-murray",
+      "careerId": "cameron-murray",
+      "name": "Cameron Murray",
+      "state": "NSW",
+      "year": 2022,
+      "basePositions": "lock",
+      "positions": "lock",
+      "baseCoverPositions": "edge",
+      "coverPositions": "edge",
+      "baseOverall": 85,
+      "overall": 91,
+      "delta": 6,
+      "attack": 91,
+      "defence": 95,
+      "workrate": 98,
+      "kicking": 30,
+      "goalKicking": 12,
+      "bigGame": 96,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "NSW-2023-josh-addo-carr",
+      "careerId": "josh-addo-carr",
+      "name": "Josh Addo-Carr",
+      "state": "NSW",
+      "year": 2023,
+      "basePositions": "wing",
+      "positions": "wing",
+      "baseCoverPositions": "fullback/centre",
+      "coverPositions": "",
+      "baseOverall": 87,
+      "overall": 91,
+      "delta": 4,
+      "attack": 98,
+      "defence": 89,
+      "workrate": 93,
+      "kicking": 28,
+      "goalKicking": 22,
+      "bigGame": 96,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "QLD-2019-corey-oates",
+      "careerId": "corey-oates",
+      "name": "Corey Oates",
+      "state": "QLD",
+      "year": 2019,
+      "basePositions": "wing",
+      "positions": "wing",
+      "baseCoverPositions": "",
+      "coverPositions": "",
+      "baseOverall": 83,
+      "overall": 87,
+      "delta": 4,
+      "attack": 94,
+      "defence": 85,
+      "workrate": 88,
+      "kicking": 28,
+      "goalKicking": 22,
+      "bigGame": 90,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "NSW-2012-luke-lewis",
+      "careerId": "luke-lewis",
+      "name": "Luke Lewis",
+      "state": "NSW",
+      "year": 2012,
+      "basePositions": "edge",
+      "positions": "edge",
+      "baseCoverPositions": "middle/lock",
+      "coverPositions": "centre/lock",
+      "baseOverall": 81,
+      "overall": 85,
+      "delta": 4,
+      "attack": 84,
+      "defence": 89,
+      "workrate": 92,
+      "kicking": 28,
+      "goalKicking": 12,
+      "bigGame": 90,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "QLD-2002-andrew-gee",
+      "careerId": "andrew-gee",
+      "name": "Andrew GEE",
+      "state": "QLD",
+      "year": 2002,
+      "basePositions": "middle/edge",
+      "positions": "edge/middle",
+      "baseCoverPositions": "lock",
+      "coverPositions": "lock",
+      "baseOverall": 80,
+      "overall": 84,
+      "delta": 4,
+      "attack": 83,
+      "defence": 88,
+      "workrate": 91,
+      "kicking": 28,
+      "goalKicking": 12,
+      "bigGame": 89,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "QLD-1999-steve-price",
+      "careerId": "steve-price",
+      "name": "Steve Price",
+      "state": "QLD",
+      "year": 1999,
+      "basePositions": "middle",
+      "positions": "middle",
+      "baseCoverPositions": "edge/lock",
+      "coverPositions": "lock",
+      "baseOverall": 84,
+      "overall": 88,
+      "delta": 4,
+      "attack": 87,
+      "defence": 92,
+      "workrate": 97,
+      "kicking": 28,
+      "goalKicking": 12,
+      "bigGame": 96,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "QLD-1999-tonie-carroll",
+      "careerId": "tonie-carroll",
+      "name": "Tonie Carroll",
+      "state": "QLD",
+      "year": 1999,
+      "basePositions": "centre",
+      "positions": "edge",
+      "baseCoverPositions": "fullback/wing",
+      "coverPositions": "centre/lock",
+      "baseOverall": 82,
+      "overall": 86,
+      "delta": 4,
+      "attack": 92,
+      "defence": 84,
+      "workrate": 88,
+      "kicking": 28,
+      "goalKicking": 22,
+      "bigGame": 92,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "NSW-2018-damien-cook",
+      "careerId": "damien-cook",
+      "name": "Damien Cook",
+      "state": "NSW",
+      "year": 2018,
+      "basePositions": "hooker",
+      "positions": "hooker",
+      "baseCoverPositions": "",
+      "coverPositions": "",
+      "baseOverall": 89,
+      "overall": 91,
+      "delta": 2,
+      "attack": 93,
+      "defence": 94,
+      "workrate": 97,
+      "kicking": 81,
+      "goalKicking": 12,
+      "bigGame": 96,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "QLD-2015-corey-parker",
+      "careerId": "corey-parker",
+      "name": "Corey Parker",
+      "state": "QLD",
+      "year": 2015,
+      "basePositions": "lock",
+      "positions": "lock",
+      "baseCoverPositions": "edge/middle",
+      "coverPositions": "edge/middle",
+      "baseOverall": 88,
+      "overall": 90,
+      "delta": 2,
+      "attack": 89,
+      "defence": 94,
+      "workrate": 97,
+      "kicking": 26,
+      "goalKicking": 12,
+      "bigGame": 96,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "QLD-2006-carl-webb",
+      "careerId": "carl-webb",
+      "name": "Carl Webb",
+      "state": "QLD",
+      "year": 2006,
+      "basePositions": "edge",
+      "positions": "edge",
+      "baseCoverPositions": "middle/lock",
+      "coverPositions": "middle/lock",
+      "baseOverall": 86,
+      "overall": 88,
+      "delta": 2,
+      "attack": 88,
+      "defence": 92,
+      "workrate": 95,
+      "kicking": 26,
+      "goalKicking": 12,
+      "bigGame": 92,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "QLD-1990-gary-belcher",
+      "careerId": "gary-belcher",
+      "name": "Gary Belcher",
+      "state": "QLD",
+      "year": 1990,
+      "basePositions": "fullback",
+      "positions": "fullback",
+      "baseCoverPositions": "wing/centre",
+      "coverPositions": "",
+      "baseOverall": 89,
+      "overall": 91,
+      "delta": 2,
+      "attack": 98,
+      "defence": 89,
+      "workrate": 93,
+      "kicking": 81,
+      "goalKicking": 78,
+      "bigGame": 96,
+      "notes": ""
+    },
+    {
+      "type": "rating",
+      "seasonKey": "QLD-1990-sam-backo",
+      "careerId": "sam-backo",
+      "name": "Sam Backo",
+      "state": "QLD",
+      "year": 1990,
+      "basePositions": "middle",
+      "positions": "middle",
+      "baseCoverPositions": "edge/lock",
+      "coverPositions": "edge/lock",
+      "baseOverall": 78,
+      "overall": 80,
+      "delta": 2,
+      "attack": 79,
+      "defence": 84,
+      "workrate": 86,
+      "kicking": 26,
+      "goalKicking": 12,
+      "bigGame": 82,
+      "notes": ""
+    }
+  ]
+}
