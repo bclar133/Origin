@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NRL Invincible - Rugby League Season Simulator</title>
+    <meta name="description" content="NRL Invincible is a fan-made rugby league game where you draft a 13-player squad, simulate a season, chase finals glory, and try to go undefeated." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.brent-clark.com/nrlinvincible/" />
+    <meta property="og:site_name" content="Brent Clark Games" />
+    <meta property="og:title" content="NRL Invincible" />
+    <meta property="og:description" content="Draft your squad, simulate a season, and see if you can go undefeated." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.brent-clark.com/nrlinvincible/" />
+    <meta property="og:image" content="https://www.brent-clark.com/nrlinvincible/social-preview.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NRL Invincible" />
+    <meta name="twitter:description" content="Draft your squad, simulate a season, and see if you can go undefeated." />
+    <meta name="twitter:image" content="https://www.brent-clark.com/nrlinvincible/social-preview.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css?v=ratings-merge-3-20260616" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "NRL Invincible",
+        "url": "https://www.brent-clark.com/nrlinvincible/",
+        "description": "A fan-made rugby league season simulator where you draft a 13-player squad, simulate a season, chase finals glory, and try to go undefeated.",
+        "applicationCategory": "Game",
+        "operatingSystem": "Web browser",
+        "genre": ["Sports game", "Simulation game"],
+        "creator": {
+          "@type": "Person",
+          "name": "Brent Clark"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="app" class="shell" aria-label="NRL Invincible game"></main>
+    <noscript>
+      <h1>NRL Invincible</h1>
+      <p>NRL Invincible is a fan-made rugby league season simulator. Draft a 13-player squad, choose your style, play through finals, and see if you can go through a season undefeated.</p>
+    </noscript>
+    <script src="player-data.js?v=position-audit-20260613"></script>
+    <script>
+      window.addEventListener("error", (event) => {
+        const scriptPath = event.target?.src ? new URL(event.target.src).pathname : "";
+        if (scriptPath.endsWith("/player-position-audit.js")) {
+          event.preventDefault();
+          window.NRL_PLAYER_POSITION_AUDIT = null;
+        }
+      }, true);
+    </script>
+    <script src="player-position-audit.js?v=position-audit-20260613"></script>
+    <script src="app.js?v=ratings-merge-3-20260616"></script>
+  </body>
+</html>

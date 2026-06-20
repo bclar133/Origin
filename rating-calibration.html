@@ -3,24 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Origin Invincible Rating Calibration</title>
-    <meta name="description" content="Tune Origin Invincible player ratings and export rating overrides." />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <title>NRL Invincible Rating Calibration</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="rating-calibration.css" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="rating-calibration.css?v=20260616-quick-buttons" />
   </head>
   <body>
     <main class="calibration-shell">
       <header class="calibration-header">
         <div>
-          <p class="eyebrow">Origin Invincible</p>
-          <h1>Rating Calibration</h1>
-          <p class="subtitle">Tune Origin player-season ratings. Changes save in this browser and the game applies them when it loads.</p>
+          <p class="eyebrow">NRL Invincible</p>
+          <h1>Career Rating Calibration</h1>
+          <p class="subtitle">Rate a wide spread of players quickly. Your entries save automatically in this browser.</p>
         </div>
         <div class="header-actions">
-          <a class="button" href="index.html">Back To Game</a>
+          <button id="saveWorkspace" class="button success">Save to Workspace</button>
           <button id="copyJson" class="button primary">Copy JSON</button>
           <button id="downloadCsv" class="button">Download CSV</button>
         </div>
@@ -38,23 +37,10 @@
         <label>
           <span>View</span>
           <select id="viewMode">
-            <option value="batch" selected>Current spread</option>
-            <option value="edited">Edited only</option>
-            <option value="all">All player-seasons</option>
-          </select>
-        </label>
-        <label>
-          <span>State</span>
-          <select id="stateFilter">
-            <option value="all" selected>All states</option>
-            <option value="QLD">QLD</option>
-            <option value="NSW">NSW</option>
-          </select>
-        </label>
-        <label>
-          <span>Year</span>
-          <select id="yearFilter">
-            <option value="all" selected>All years</option>
+            <option value="batch" selected>Current batch</option>
+            <option value="unanswered">Unanswered in batch</option>
+            <option value="answered">Answered only</option>
+            <option value="all">All sampled answers</option>
           </select>
         </label>
         <label class="search-field">
@@ -62,7 +48,7 @@
           <input id="searchBox" type="search" placeholder="Find a player" autocomplete="off" />
         </label>
         <button id="newBatch" class="button accent">New Spread</button>
-        <button id="clearOverrides" class="button danger">Clear Changes</button>
+        <button id="clearAnswers" class="button danger">Clear Answers</button>
       </section>
 
       <section id="summary" class="summary-panel"></section>
@@ -70,7 +56,7 @@
         <div class="export-header">
           <div>
             <h2 id="exportTitle">Export</h2>
-            <p id="exportStatus">Export text is ready.</p>
+            <p id="exportStatus">The export text is ready.</p>
           </div>
           <button id="selectExportText" class="button">Select Text</button>
         </div>
@@ -79,7 +65,19 @@
       <section id="playerGrid" class="player-grid"></section>
     </main>
 
-    <script src="origin-data.js?v=20260619084049"></script>
-    <script src="rating-calibration-tool.js?v=20260619084049"></script>
+    <main id="app" class="hidden-game" aria-hidden="true"></main>
+    <script src="player-data.js?v=position-audit-20260613"></script>
+    <script>
+      window.addEventListener("error", (event) => {
+        const scriptPath = event.target?.src ? new URL(event.target.src).pathname : "";
+        if (scriptPath.endsWith("/player-position-audit.js")) {
+          event.preventDefault();
+          window.NRL_PLAYER_POSITION_AUDIT = null;
+        }
+      }, true);
+    </script>
+    <script src="player-position-audit.js?v=position-audit-20260613"></script>
+    <script src="app.js?v=goal-kicker-selection-20260615"></script>
+    <script src="rating-calibration-tool.js?v=20260616-workspace-save"></script>
   </body>
 </html>

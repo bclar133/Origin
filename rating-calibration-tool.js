@@ -1,35 +1,14 @@
 (() => {
-  const DATA = window.ORIGIN_INVINCIBLE_DATA;
-  const STORAGE_KEY = "origin-invincible-rating-overrides-v1";
-  const BATCH_KEY = "origin-invincible-rating-batch-v1";
-  const RATING_KEYS = ["overall", "attack", "defence", "workrate", "kicking", "goalKicking", "bigGame"];
-  const POSITION_KEYS = ["fullback", "wing", "centre", "half", "edge", "middle", "lock", "hooker"];
-  const POSITION_LABELS = {
-    fullback: "FB",
-    wing: "Wing",
-    centre: "Centre",
-    half: "Half",
-    edge: "Edge",
-    middle: "Middle",
-    lock: "Lock",
-    hooker: "Hooker"
-  };
-  const KEY_LABELS = {
-    overall: "Overall",
-    attack: "Attack",
-    defence: "Defence",
-    workrate: "Work",
-    kicking: "Kick",
-    goalKicking: "Goal %",
-    bigGame: "Big Game"
-  };
+  const STORAGE_KEY = "nrl-invincible-rating-calibration-v2";
+  const BATCH_KEY = "nrl-invincible-rating-calibration-batch-v2";
+  const ATTRIBUTE_KEYS = ["overall", "attack", "defence", "workrate", "kicking", "goalKicking", "bigGame"];
   const BUCKETS = [
-    { min: 95, max: 100, weight: .14 },
-    { min: 90, max: 94, weight: .18 },
-    { min: 85, max: 89, weight: .2 },
-    { min: 80, max: 84, weight: .2 },
-    { min: 70, max: 79, weight: .2 },
-    { min: 0, max: 69, weight: .08 }
+    { label: "96-100", min: 96, max: 100, weight: 0.1 },
+    { label: "90-95", min: 90, max: 95, weight: 0.18 },
+    { label: "85-89", min: 85, max: 89, weight: 0.2 },
+    { label: "80-84", min: 80, max: 84, weight: 0.2 },
+    { label: "70-79", min: 70, max: 79, weight: 0.2 },
+    { label: "Under 70", min: 0, max: 69, weight: 0.12 }
   ];
 
   const elements = {
@@ -37,11 +16,10 @@
     grid: document.querySelector("#playerGrid"),
     batchSize: document.querySelector("#batchSize"),
     viewMode: document.querySelector("#viewMode"),
-    stateFilter: document.querySelector("#stateFilter"),
-    yearFilter: document.querySelector("#yearFilter"),
     searchBox: document.querySelector("#searchBox"),
     newBatch: document.querySelector("#newBatch"),
-    clearOverrides: document.querySelector("#clearOverrides"),
+    clearAnswers: document.querySelector("#clearAnswers"),
+    saveWorkspace: document.querySelector("#saveWorkspace"),
     copyJson: document.querySelector("#copyJson"),
     downloadCsv: document.querySelector("#downloadCsv"),
     exportPanel: document.querySelector("#exportPanel"),
@@ -51,64 +29,64 @@
     selectExportText: document.querySelector("#selectExportText")
   };
 
-  const profiles = buildProfiles();
-  const profileMap = new Map(profiles.map((profile) => [profile.seasonKey, profile]));
-  const profilesByCareer = groupProfilesByCareer(profiles);
-  const storedOverrides = normaliseStore(loadJson(STORAGE_KEY, { seasons: {}, careers: {} }));
+  const profiles = buildCalibrationProfiles();
   const state = {
-    overrides: storedOverrides.store,
-    batchIds: loadJson(BATCH_KEY, []),
+    answers: loadJson(STORAGE_KEY, {}),
+    batchIds: loadJson(BATCH_KEY, null) || [],
     search: "",
-    viewMode: "batch",
-    stateFilter: "all",
-    yearFilter: "all"
+    viewMode: "batch"
   };
-
-  if (storedOverrides.changed) saveOverrides();
 
   if (!state.batchIds.length) {
     state.batchIds = createSpreadBatch(Number(elements.batchSize.value));
     saveBatch();
   }
 
-  populateYears();
   bindEvents();
   render();
 
-  function buildProfiles() {
-    const rows = [];
-    for (const team of DATA.teams || []) {
-      for (const p of team.players || []) {
-        const careerId = slug(p.name);
-        rows.push({
-          seasonKey: `${team.state}-${team.year}-${careerId}`,
-          careerId,
-          name: p.name,
-          state: team.state,
-          year: team.year,
-          positions: p.positions || [],
-          coverPositions: Array.isArray(p.coverPositions) ? p.coverPositions : deriveCoverPositions(p.positions || []),
-          role: p.role || "Origin player",
-          ratings: { ...p.ratings },
-          searchText: `${p.name} ${team.state} ${team.year} ${(p.positions || []).join(" ")} ${p.role || ""}`.toLowerCase()
-        });
-      }
+  function buildCalibrationProfiles() {
+    const rowsByCareer = new Map();
+
+    for (const row of PLAYER_SEASONS) {
+      if (!rowsByCareer.has(row.careerId)) rowsByCareer.set(row.careerId, []);
+      rowsByCareer.get(row.careerId).push(row);
     }
-    return rows.sort((a, b) => b.ratings.overall - a.ratings.overall || b.year - a.year || a.name.localeCompare(b.name));
+
+    return [...careerProfiles.values()]
+      .map((profile) => {
+        const rows = rowsByCareer.get(profile.id) || [];
+        const peakRow = [...rows].sort((a, b) => b.ratings.overall - a.ratings.overall || (b.starts || 0) - (a.starts || 0) || (b.apps || 0) - (a.apps || 0))[0];
+        const totalApps = rows.reduce((sum, row) => sum + (row.apps || 0), 0);
+        const seasons = [...new Set(rows.map((row) => row.season))].sort((a, b) => a - b);
+        const clubs = [...new Set(rows.map((row) => row.club))].sort();
+        const positions = [...new Set(rows.flatMap((row) => row.positions || []))].sort();
+        const currentRating = getCurrentCareerRating(profile);
+
+        return {
+          careerId: profile.id,
+          name: profile.name,
+          currentRating,
+          rawPeak: profile.peakOverall,
+          tier: ratingTier(currentRating),
+          positions,
+          clubs,
+          seasons,
+          totalApps,
+          peakSeason: peakRow?.season || seasons.at(-1) || "",
+          peakClub: peakRow?.club || clubs[0] || "",
+          peakRole: peakRow?.role || "",
+          peakRatings: profile.peakRatings
+        };
+      })
+      .filter((profile) => profile.name && Number.isFinite(profile.currentRating))
+      .sort((a, b) => b.currentRating - a.currentRating || b.totalApps - a.totalApps || a.name.localeCompare(b.name));
   }
 
-  function groupProfilesByCareer(rows) {
-    const grouped = new Map();
-    for (const profile of rows) {
-      if (!grouped.has(profile.careerId)) grouped.set(profile.careerId, []);
-      grouped.get(profile.careerId).push(profile);
-    }
-    return grouped;
-  }
-
-  function populateYears() {
-    const years = [...new Set(profiles.map((profile) => profile.year))].sort((a, b) => b - a);
-    elements.yearFilter.insertAdjacentHTML("beforeend", years.map((year) => `<option value="${year}">${year}</option>`).join(""));
+  function getCurrentCareerRating(profile) {
+    const calibration = typeof CAREER_RATING_CALIBRATION !== "undefined" ? CAREER_RATING_CALIBRATION : {};
+    if (calibration[profile.id]) return calibration[profile.id];
+    return spreadRatings(profile.peakRatings).overall;
   }
 
   function bindEvents() {
@@ -129,28 +107,19 @@
       render();
     });
 
-    elements.stateFilter.addEventListener("change", () => {
-      state.stateFilter = elements.stateFilter.value;
-      render();
-    });
-
-    elements.yearFilter.addEventListener("change", () => {
-      state.yearFilter = elements.yearFilter.value;
-      render();
-    });
-
     elements.searchBox.addEventListener("input", () => {
       state.search = elements.searchBox.value.trim().toLowerCase();
       render();
     });
 
-    elements.clearOverrides.addEventListener("click", () => {
-      if (!window.confirm("Clear all Origin rating and position changes saved in this browser?")) return;
-      state.overrides = { seasons: {}, careers: {} };
-      saveOverrides();
+    elements.clearAnswers.addEventListener("click", () => {
+      if (!window.confirm("Clear all saved rating answers in this browser?")) return;
+      state.answers = {};
+      saveAnswers();
       render();
     });
 
+    elements.saveWorkspace.addEventListener("click", saveWorkspace);
     elements.copyJson.addEventListener("click", copyJson);
     elements.downloadCsv.addEventListener("click", downloadCsv);
     elements.selectExportText.addEventListener("click", () => {
@@ -162,23 +131,43 @@
   function createSpreadBatch(size) {
     const selected = [];
     const selectedIds = new Set();
+
     for (const bucket of BUCKETS) {
       const target = Math.max(2, Math.round(size * bucket.weight));
-      addCandidates(selected, selectedIds, shuffle(profiles.filter((profile) => profile.ratings.overall >= bucket.min && profile.ratings.overall <= bucket.max)), target);
+      const candidates = shuffle(profiles.filter((profile) => profile.currentRating >= bucket.min && profile.currentRating <= bucket.max));
+      addCandidates(selected, selectedIds, candidates, target);
     }
+
     addCandidates(selected, selectedIds, shuffle(profiles), size - selected.length);
-    return selected.slice(0, size).map((profile) => profile.seasonKey);
+
+    return selected
+      .slice(0, size)
+      .sort((a, b) => b.currentRating - a.currentRating || a.name.localeCompare(b.name))
+      .map((profile) => profile.careerId);
   }
 
   function addCandidates(selected, selectedIds, candidates, target) {
+    const positionCounts = new Map();
     let added = 0;
-    for (const profile of candidates) {
-      if (added >= target) return;
-      if (selectedIds.has(profile.seasonKey)) continue;
-      selected.push(profile);
-      selectedIds.add(profile.seasonKey);
-      added += 1;
+
+    for (const profile of selected) {
+      const key = primaryPosition(profile);
+      positionCounts.set(key, (positionCounts.get(key) || 0) + 1);
     }
+
+    candidates
+      .map((profile) => ({
+        profile,
+        score: Math.random() + Math.min(240, profile.totalApps) / 820 - (positionCounts.get(primaryPosition(profile)) || 0) * 0.08
+      }))
+      .sort((a, b) => b.score - a.score)
+      .forEach(({ profile }) => {
+        if (added >= target) return;
+        if (selectedIds.has(profile.careerId)) return;
+        selected.push(profile);
+        selectedIds.add(profile.careerId);
+        added += 1;
+      });
   }
 
   function render() {
@@ -187,19 +176,16 @@
   }
 
   function renderSummary() {
-    const edited = exportRows();
-    const visible = visibleProfiles();
-    const ratingRows = edited.filter((row) => Number.isFinite(Number(row.delta)));
-    const avgDelta = ratingRows.length
-      ? Math.round(ratingRows.reduce((sum, row) => sum + Number(row.delta), 0) / ratingRows.length * 10) / 10
-      : 0;
+    const answered = getAnsweredProfiles();
+    const visible = getVisibleProfiles();
+    const averageDelta = answered.length ? Math.round(answered.reduce((sum, item) => sum + answerDelta(item), 0) / answered.length * 10) / 10 : 0;
 
     elements.summary.innerHTML = [
-      summaryMetric("Database", `${profiles.length} rows`),
+      summaryMetric("Batch", `${state.batchIds.length} players`),
       summaryMetric("Visible", visible.length),
-      summaryMetric("Changed", edited.length),
-      summaryMetric("Avg overall delta", signed(avgDelta)),
-      summaryMetric("Saved", "Browser")
+      summaryMetric("Answered", answered.length),
+      summaryMetric("Avg delta", signed(averageDelta)),
+      summaryMetric("Export rows", getExportRows().length)
     ].join("");
   }
 
@@ -208,438 +194,287 @@
   }
 
   function renderCards() {
-    const rows = visibleProfiles();
+    const rows = getVisibleProfiles();
+
     if (!rows.length) {
       elements.grid.innerHTML = `<div class="empty">No players match this view.</div>`;
       return;
     }
 
     elements.grid.innerHTML = rows.map(renderCard).join("");
-    elements.grid.querySelectorAll("[data-rating-key]").forEach((input) => input.addEventListener("input", handleRatingInput));
-    elements.grid.querySelectorAll("[data-notes-input]").forEach((input) => input.addEventListener("input", handleNotesInput));
-    elements.grid.querySelectorAll("[data-quick]").forEach((button) => button.addEventListener("click", handleQuickButton));
-    elements.grid.querySelectorAll("[data-position-toggle]").forEach((button) => button.addEventListener("click", handlePositionToggle));
+    elements.grid.querySelectorAll("[data-rating-input]").forEach((input) => {
+      input.addEventListener("input", handleRatingInput);
+    });
+    elements.grid.querySelectorAll("[data-notes-input]").forEach((input) => {
+      input.addEventListener("input", handleNotesInput);
+    });
+    elements.grid.querySelectorAll("[data-quick]").forEach((button) => {
+      button.addEventListener("click", handleQuickButton);
+    });
   }
 
   function renderCard(profile) {
-    const override = state.overrides.seasons[profile.seasonKey];
-    const careerOverride = getCareerOverride(profile);
-    const values = currentValues(profile);
-    const positions = currentPrimaryPositions(profile);
-    const coverPositions = currentCoverPositions(profile);
-    const delta = values.overall - profile.ratings.overall;
-    const edited = Boolean(override || careerOverride);
+    const answer = state.answers[profile.careerId] || {};
+    const ratingValue = answer.rating ?? "";
+    const delta = ratingValue === "" ? "" : Number(ratingValue) - profile.currentRating;
+    const answeredClass = ratingValue === "" ? "" : "answered";
 
     return `
-      <article class="rating-card ${edited ? "edited" : ""}" data-season-key="${escapeHtml(profile.seasonKey)}">
+      <article class="rating-card ${answeredClass}" data-career-id="${escapeHtml(profile.careerId)}">
         <div class="card-top">
           <div>
             <div class="player-name">${escapeHtml(profile.name)}</div>
-            <div class="player-meta">${escapeHtml(profile.year)} ${escapeHtml(profile.state)} | Primary: ${escapeHtml(positions.map(positionLabel).join(", ") || "No position")} | Cover: ${escapeHtml(coverPositions.map(positionLabel).join(", ") || "None")}</div>
-            <div class="player-detail">Original this year: ${escapeHtml(profile.positions.map(positionLabel).join(", ") || "None")}. ${edited ? "Saved override active." : "No override yet."}</div>
+            <div class="player-meta">${escapeHtml(profile.positions.join(", ") || "No regular position")} | ${escapeHtml(profile.clubs.slice(0, 4).join(", "))}</div>
+            <div class="player-detail">Peak: ${escapeHtml(String(profile.peakSeason))} ${escapeHtml(profile.peakClub)} | Apps in data: ${profile.totalApps}</div>
           </div>
-          <div class="badge ${ratingClass(values.overall)}">${values.overall}</div>
+          <div class="rating-badge ${ratingClass(profile.currentRating)}">${profile.currentRating}</div>
         </div>
-        <div class="position-editor">
-          <div class="position-group">
-            <div class="position-title">Primary positions <span>career-wide</span></div>
-            <div class="position-options">
-              ${POSITION_KEYS.map((position) => `
-                <button class="${positions.includes(position) ? "active primary" : ""}" data-position-kind="primary" data-position-toggle="${position}" data-season-key="${escapeHtml(profile.seasonKey)}">${POSITION_LABELS[position]}</button>
-              `).join("")}
+        <div class="entry-row">
+          <div>
+            <input class="rating-input" data-rating-input="${escapeHtml(profile.careerId)}" type="number" inputmode="numeric" min="40" max="100" step="1" value="${escapeHtml(String(ratingValue))}" placeholder="--" />
+            <div class="quick-buttons">
+              <button data-quick="same" data-career-id="${escapeHtml(profile.careerId)}">Same</button>
+              <button data-quick="-2" data-career-id="${escapeHtml(profile.careerId)}">-2</button>
+              <button data-quick="-1" data-career-id="${escapeHtml(profile.careerId)}">-1</button>
+              <button data-quick="1" data-career-id="${escapeHtml(profile.careerId)}">+1</button>
+              <button data-quick="2" data-career-id="${escapeHtml(profile.careerId)}">+2</button>
             </div>
           </div>
-          <div class="position-group">
-            <div class="position-title">Cover positions <span>career-wide</span></div>
-            <div class="position-options cover-options">
-              ${POSITION_KEYS.map((position) => `
-                <button class="${coverPositions.includes(position) ? "active cover" : ""}" data-position-kind="cover" data-position-toggle="${position}" data-season-key="${escapeHtml(profile.seasonKey)}">${POSITION_LABELS[position]}</button>
-              `).join("")}
-            </div>
+          <div>
+            <div class="delta ${deltaClass(delta)}">${delta === "" ? "No answer yet" : `Your delta ${signed(delta)}`}</div>
+            <textarea data-notes-input="${escapeHtml(profile.careerId)}" placeholder="Optional note">${escapeHtml(answer.notes || "")}</textarea>
           </div>
         </div>
-        <div class="rating-fields">
-          ${RATING_KEYS.map((key) => `
-            <label>
-              <span>${KEY_LABELS[key]}</span>
-              <input data-season-key="${escapeHtml(profile.seasonKey)}" data-rating-key="${key}" type="number" inputmode="numeric" min="1" max="100" step="1" value="${values[key]}" />
-            </label>
-          `).join("")}
-        </div>
-        <div class="quick-row">
-          <button data-quick="reset" data-season-key="${escapeHtml(profile.seasonKey)}">Same</button>
-          <button data-quick="-2" data-season-key="${escapeHtml(profile.seasonKey)}">-2</button>
-          <button data-quick="-1" data-season-key="${escapeHtml(profile.seasonKey)}">-1</button>
-          <button data-quick="1" data-season-key="${escapeHtml(profile.seasonKey)}">+1</button>
-          <button data-quick="2" data-season-key="${escapeHtml(profile.seasonKey)}">+2</button>
-          <span class="delta ${deltaClass(delta)}">Overall delta ${signed(delta)}</span>
-        </div>
-        <textarea data-notes-input="${escapeHtml(profile.seasonKey)}" placeholder="Optional note">${escapeHtml(override?.notes || "")}</textarea>
       </article>
     `;
   }
 
-  function visibleProfiles() {
-    let rows = state.viewMode === "all" ? profiles : state.batchIds.map((id) => profileMap.get(id)).filter(Boolean);
+  function getVisibleProfiles() {
+    const batchProfiles = state.batchIds.map((id) => profileById(id)).filter(Boolean);
+    let rows = state.viewMode === "all" ? getAnsweredProfiles() : batchProfiles;
 
-    if (state.viewMode === "edited") {
-      const edited = new Map();
-      Object.keys(state.overrides.seasons).forEach((id) => {
-        const profile = profileMap.get(id);
-        if (profile) edited.set(profile.seasonKey, profile);
-      });
-      Object.keys(state.overrides.careers).forEach((careerId) => {
-        (profilesByCareer.get(careerId) || []).forEach((profile) => edited.set(profile.seasonKey, profile));
-      });
-      rows = [...edited.values()];
+    if (state.viewMode === "unanswered") {
+      rows = rows.filter((profile) => !hasAnswer(profile.careerId));
+    } else if (state.viewMode === "answered") {
+      rows = batchProfiles.filter((profile) => hasAnswer(profile.careerId));
     }
 
-    if (state.stateFilter !== "all") rows = rows.filter((profile) => profile.state === state.stateFilter);
-    if (state.yearFilter !== "all") rows = rows.filter((profile) => String(profile.year) === state.yearFilter);
-    if (state.search) rows = profiles.filter((profile) => profile.searchText.includes(state.search));
+    if (state.search) {
+      rows = profiles.filter((profile) => searchableText(profile).includes(state.search));
+    }
 
     return rows;
   }
 
   function handleRatingInput(event) {
-    const profile = profileMap.get(event.currentTarget.dataset.seasonKey);
-    if (!profile) return;
-    const ratings = currentValues(profile);
-    const key = event.currentTarget.dataset.ratingKey;
-    ratings[key] = clamp(Math.round(Number(event.currentTarget.value) || profile.ratings[key]), 1, 100);
-    updateSeasonOverride(profile, ratings, state.overrides.seasons[profile.seasonKey]?.notes || "");
+    const careerId = event.currentTarget.dataset.ratingInput;
+    const value = event.currentTarget.value === "" ? "" : clamp(Number(event.currentTarget.value), 40, 100);
+    updateAnswer(careerId, { rating: value });
+    refreshCardState(event.currentTarget.closest(".rating-card"), careerId);
   }
 
   function handleNotesInput(event) {
-    const profile = profileMap.get(event.currentTarget.dataset.notesInput);
-    if (!profile) return;
-    const ratings = currentValues(profile);
-    updateSeasonOverride(profile, ratings, event.currentTarget.value);
-  }
-
-  function handlePositionToggle(event) {
-    const profile = profileMap.get(event.currentTarget.dataset.seasonKey);
-    if (!profile) return;
-    const position = event.currentTarget.dataset.positionToggle;
-    const kind = event.currentTarget.dataset.positionKind;
-    const primary = currentPrimaryPositions(profile);
-    const cover = currentCoverPositions(profile);
-    let nextPrimary = [...primary];
-    let nextCover = [...cover];
-
-    if (kind === "primary") {
-      if (nextPrimary.includes(position)) {
-        if (nextPrimary.length === 1) return;
-        nextPrimary = nextPrimary.filter((item) => item !== position);
-      } else {
-        nextPrimary.push(position);
-        nextCover = nextCover.filter((item) => item !== position);
-      }
-    } else {
-      if (nextCover.includes(position)) {
-        nextCover = nextCover.filter((item) => item !== position);
-      } else {
-        if (nextPrimary.includes(position)) {
-          if (nextPrimary.length === 1) return;
-          nextPrimary = nextPrimary.filter((item) => item !== position);
-        }
-        nextCover.push(position);
-      }
-    }
-
-    updateCareerPositionOverride(profile, sortPositions(nextPrimary), sortPositions(nextCover));
-    render();
+    updateAnswer(event.currentTarget.dataset.notesInput, { notes: event.currentTarget.value });
   }
 
   function handleQuickButton(event) {
-    const profile = profileMap.get(event.currentTarget.dataset.seasonKey);
+    const careerId = event.currentTarget.dataset.careerId;
+    const profile = profileById(careerId);
     if (!profile) return;
     const action = event.currentTarget.dataset.quick;
-
-    if (action === "reset") {
-      delete state.overrides.seasons[profile.seasonKey];
-      delete state.overrides.careers[profile.careerId];
-      saveOverrides();
-      render();
-      return;
-    }
-
-    const delta = Number(action);
-    const ratings = currentValues(profile);
-    for (const key of RATING_KEYS) {
-      if (key === "goalKicking") continue;
-      ratings[key] = clamp(ratings[key] + delta, 1, 100);
-    }
-    updateSeasonOverride(profile, ratings, state.overrides.seasons[profile.seasonKey]?.notes || "");
+    const currentAnswer = state.answers[careerId]?.rating;
+    const base = Number.isFinite(Number(currentAnswer)) ? Number(currentAnswer) : profile.currentRating;
+    const rating = action === "same" ? profile.currentRating : clamp(base + Number(action), 40, 100);
+    updateAnswer(careerId, { rating });
     render();
   }
 
-  function updateSeasonOverride(profile, ratings, notes = state.overrides.seasons[profile.seasonKey]?.notes || "") {
-    const changed = RATING_KEYS.some((key) => Number(ratings[key]) !== Number(profile.ratings[key]));
-    if (!changed && !notes.trim()) {
-      delete state.overrides.seasons[profile.seasonKey];
-    } else {
-      state.overrides.seasons[profile.seasonKey] = {
-        seasonKey: profile.seasonKey,
-        careerId: profile.careerId,
-        name: profile.name,
-        state: profile.state,
-        year: profile.year,
-        baseRatings: profile.ratings,
-        ratings: Object.fromEntries(RATING_KEYS.map((key) => [key, clamp(Math.round(Number(ratings[key])), 1, 100)])),
-        notes,
-        updatedAt: new Date().toISOString()
-      };
-    }
-    saveOverrides();
-    renderSummary();
-    refreshCard(profile);
-  }
-
-  function updateCareerPositionOverride(profile, positions, coverPositions) {
-    const baseCover = profile.coverPositions || deriveCoverPositions(profile.positions);
-    const positionChanged = !samePositions(positions, profile.positions) || !samePositions(coverPositions, baseCover);
-
-    if (!positionChanged) {
-      delete state.overrides.careers[profile.careerId];
-    } else {
-      state.overrides.careers[profile.careerId] = {
-        careerId: profile.careerId,
-        name: profile.name,
-        basePositions: profile.positions,
-        baseCoverPositions: baseCover,
-        positions: sortPositions(positions),
-        coverPositions: sortPositions(coverPositions).filter((position) => !positions.includes(position)),
-        updatedAt: new Date().toISOString()
-      };
-    }
-
-    saveOverrides();
-    renderSummary();
-  }
-
-  function refreshCard(profile) {
-    const card = elements.grid.querySelector(`[data-season-key="${cssEscape(profile.seasonKey)}"]`);
-    if (!card) return;
-    const values = currentValues(profile);
-    const positions = currentPrimaryPositions(profile);
-    const coverPositions = currentCoverPositions(profile);
-    const delta = values.overall - profile.ratings.overall;
-    card.classList.toggle("edited", Boolean(state.overrides.seasons[profile.seasonKey] || getCareerOverride(profile)));
-    const badge = card.querySelector(".badge");
-    if (badge) {
-      badge.className = `badge ${ratingClass(values.overall)}`;
-      badge.textContent = values.overall;
-    }
-    const deltaNode = card.querySelector(".delta");
-    if (deltaNode) {
-      deltaNode.className = `delta ${deltaClass(delta)}`;
-      deltaNode.textContent = `Overall delta ${signed(delta)}`;
-    }
-    const detail = card.querySelector(".player-detail");
-    if (detail) detail.textContent = `Original this year: ${profile.positions.map(positionLabel).join(", ") || "None"}. ${state.overrides.seasons[profile.seasonKey] || getCareerOverride(profile) ? "Saved override active." : "No override yet."}`;
-    const meta = card.querySelector(".player-meta");
-    if (meta) meta.textContent = `${profile.year} ${profile.state} | Primary: ${positions.map(positionLabel).join(", ") || "No position"} | Cover: ${coverPositions.map(positionLabel).join(", ") || "None"}`;
-    card.querySelectorAll("[data-position-toggle]").forEach((button) => {
-      const list = button.dataset.positionKind === "cover" ? coverPositions : positions;
-      button.classList.toggle("active", list.includes(button.dataset.positionToggle));
-      button.classList.toggle("primary", button.dataset.positionKind === "primary" && list.includes(button.dataset.positionToggle));
-      button.classList.toggle("cover", button.dataset.positionKind === "cover" && list.includes(button.dataset.positionToggle));
-    });
-  }
-
-  function currentValues(profile) {
-    return {
-      ...profile.ratings,
-      ...(state.overrides.seasons[profile.seasonKey]?.ratings || {})
+  function updateAnswer(careerId, patch) {
+    const profile = profileById(careerId);
+    if (!profile) return;
+    const existing = state.answers[careerId] || {};
+    state.answers[careerId] = {
+      ...existing,
+      careerId,
+      name: profile.name,
+      currentRating: profile.currentRating,
+      tier: profile.tier,
+      ...patch,
+      updatedAt: new Date().toISOString()
     };
+
+    if (state.answers[careerId].rating === "" && !state.answers[careerId].notes) {
+      delete state.answers[careerId];
+    }
+
+    saveAnswers();
+    renderSummary();
   }
 
-  function currentPrimaryPositions(profile) {
-    const positions = getCareerOverride(profile)?.positions || profile.positions || [];
-    return sortPositions(positions.filter((position) => POSITION_KEYS.includes(position)));
-  }
-
-  function currentCoverPositions(profile) {
-    const override = getCareerOverride(profile);
-    const coverPositions = Array.isArray(override?.coverPositions)
-      ? override.coverPositions
-      : profile.coverPositions || deriveCoverPositions(currentPrimaryPositions(profile));
-    return sortPositions(coverPositions.filter((position) => POSITION_KEYS.includes(position) && !currentPrimaryPositions(profile).includes(position)));
-  }
-
-  function getCareerOverride(profile) {
-    return state.overrides.careers[profile.careerId] || null;
+  function refreshCardState(card, careerId) {
+    const profile = profileById(careerId);
+    if (!card || !profile) return;
+    const answer = state.answers[careerId];
+    const value = answer?.rating ?? "";
+    const delta = value === "" ? "" : Number(value) - profile.currentRating;
+    const deltaNode = card.querySelector(".delta");
+    card.classList.toggle("answered", value !== "");
+    if (!deltaNode) return;
+    deltaNode.className = `delta ${deltaClass(delta)}`.trim();
+    deltaNode.textContent = delta === "" ? "No answer yet" : `Your delta ${signed(delta)}`;
   }
 
   async function copyJson() {
-    const payload = JSON.stringify(buildExportPayload(), null, 2);
-    showExport("JSON Export", payload, "JSON is shown below. Trying to copy it now.");
+    const payload = JSON.stringify(getExportRows(), null, 2);
+    showExport("JSON Export", payload, "JSON is shown below. Trying to copy it to the clipboard now.");
+
     if (await copyText(payload)) {
       flashButton(elements.copyJson, "Copied");
-      elements.exportStatus.textContent = "Copied to clipboard. You can also copy it manually below.";
+      elements.exportStatus.textContent = "Copied to clipboard. You can also copy it manually from the box below.";
       return;
     }
+
     selectExportText();
     flashButton(elements.copyJson, "Select Below");
-    elements.exportStatus.textContent = "Clipboard was blocked, so the JSON is selected below. Press Ctrl+C.";
+    elements.exportStatus.textContent = "Clipboard was blocked, so the JSON is selected below. Press Ctrl+C to copy it.";
+  }
+
+  async function saveWorkspace() {
+    const payload = buildExportPayload();
+    showExport("Workspace Save", JSON.stringify(payload.rows, null, 2), "Saving ratings to the local workspace helper.");
+
+    if (!payload.rows.length) {
+      elements.exportStatus.textContent = "No answered ratings to save yet.";
+      return;
+    }
+
+    try {
+      const response = await fetch("http://127.0.0.1:5174/save-ratings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+      if (!response.ok || !result.ok) throw new Error(result.error || "Save failed");
+
+      flashButton(elements.saveWorkspace, "Saved");
+      elements.exportStatus.textContent = `Saved ${result.count} ratings to ${result.files.latest}.`;
+    } catch (error) {
+      flashButton(elements.saveWorkspace, "Not Saved");
+      elements.exportStatus.textContent = `Could not reach the local save helper. Ask Codex to start it, or use the selected text below. ${error.message || ""}`.trim();
+      selectExportText();
+    }
   }
 
   function downloadCsv() {
-    const rows = exportRows();
-    const headers = ["type", "seasonKey", "careerId", "name", "state", "year", "basePositions", "positions", "baseCoverPositions", "coverPositions", "baseOverall", "overall", "delta", "attack", "defence", "workrate", "kicking", "goalKicking", "bigGame", "notes"];
+    const rows = getExportRows();
+    const headers = ["careerId", "name", "currentRating", "yourRating", "delta", "tier", "positions", "clubs", "peakSeason", "peakClub", "totalApps", "notes"];
     const csv = [
       headers.join(","),
       ...rows.map((row) => headers.map((header) => csvCell(row[header])).join(","))
     ].join("\n");
-    showExport("CSV Export", csv, "CSV is shown below. Starting download now.");
-    if (downloadText(csv, "origin-rating-overrides.csv", "text/csv")) {
+    showExport("CSV Export", csv, "CSV is shown below. Starting the download now.");
+
+    if (downloadText(csv, "nrl-rating-calibration.csv", "text/csv")) {
       flashButton(elements.downloadCsv, "Downloaded");
-      elements.exportStatus.textContent = "Download started. If no file appears, copy the CSV below.";
+      elements.exportStatus.textContent = "Download started. If no file appears, copy the CSV from the box below.";
       return;
     }
+
     selectExportText();
     flashButton(elements.downloadCsv, "Select Below");
-    elements.exportStatus.textContent = "Download was blocked, so the CSV is selected below. Press Ctrl+C.";
+    elements.exportStatus.textContent = "Download was blocked, so the CSV is selected below. Press Ctrl+C to copy it.";
+  }
+
+  function getExportRows() {
+    return Object.values(state.answers)
+      .filter((answer) => Number(answer.rating) > 0)
+      .map((answer) => {
+        const profile = profileById(answer.careerId);
+        return {
+          careerId: answer.careerId,
+          name: answer.name,
+          currentRating: answer.currentRating,
+          yourRating: Number(answer.rating),
+          delta: Number(answer.rating) - answer.currentRating,
+          tier: answer.tier,
+          positions: profile?.positions.join("/") || "",
+          clubs: profile?.clubs.join("/") || "",
+          peakSeason: profile?.peakSeason || "",
+          peakClub: profile?.peakClub || "",
+          totalApps: profile?.totalApps || "",
+          notes: answer.notes || ""
+        };
+      })
+      .sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta) || b.currentRating - a.currentRating || a.name.localeCompare(b.name));
   }
 
   function buildExportPayload() {
+    const rows = getExportRows();
     return {
       exportedAt: new Date().toISOString(),
-      storageKey: STORAGE_KEY,
-      count: exportRows().length,
-      seasons: state.overrides.seasons,
-      careers: state.overrides.careers,
-      rows: exportRows()
+      source: "rating-calibration.html",
+      count: rows.length,
+      rows,
+      calibration: Object.fromEntries(rows.map((row) => [row.careerId, row.yourRating]))
     };
   }
 
-  function exportRows() {
-    const seasonRows = Object.values(state.overrides.seasons)
-      .map((override) => {
-        const profile = profileMap.get(override.seasonKey);
-        const ratings = override.ratings || {};
-        return {
-          type: "rating",
-          seasonKey: override.seasonKey,
-          careerId: override.careerId,
-          name: override.name,
-          state: override.state,
-          year: override.year,
-          basePositions: (profile?.positions || []).join("/"),
-          positions: currentPrimaryPositions(profile || override).join("/"),
-          baseCoverPositions: profile ? (profile.coverPositions || deriveCoverPositions(profile.positions)).join("/") : "",
-          coverPositions: profile ? currentCoverPositions(profile).join("/") : "",
-          baseOverall: profile?.ratings.overall ?? override.baseRatings?.overall ?? "",
-          overall: ratings.overall,
-          delta: Number(ratings.overall) - Number(profile?.ratings.overall ?? override.baseRatings?.overall ?? ratings.overall),
-          attack: ratings.attack,
-          defence: ratings.defence,
-          workrate: ratings.workrate,
-          kicking: ratings.kicking,
-          goalKicking: ratings.goalKicking,
-          bigGame: ratings.bigGame,
-          notes: override.notes || ""
-        };
-      })
-      .sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta) || b.year - a.year || a.name.localeCompare(b.name));
-
-    const careerRows = Object.values(state.overrides.careers)
-      .map((override) => ({
-        type: "positions",
-        seasonKey: "",
-        careerId: override.careerId,
-        name: override.name,
-        state: "All",
-        year: "All",
-        basePositions: (override.basePositions || []).join("/"),
-        positions: (override.positions || []).join("/"),
-        baseCoverPositions: (override.baseCoverPositions || []).join("/"),
-        coverPositions: (override.coverPositions || []).join("/"),
-        baseOverall: "",
-        overall: "",
-        delta: "",
-        attack: "",
-        defence: "",
-        workrate: "",
-        kicking: "",
-        goalKicking: "",
-        bigGame: "",
-        notes: ""
-      }))
-      .sort((a, b) => a.name.localeCompare(b.name));
-
-    return [...careerRows, ...seasonRows];
+  function getAnsweredProfiles() {
+    return getExportRows().map((row) => profileById(row.careerId)).filter(Boolean);
   }
 
-  function saveOverrides() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.overrides));
+  function hasAnswer(careerId) {
+    return Number(state.answers[careerId]?.rating) > 0;
+  }
+
+  function answerDelta(profile) {
+    return Number(state.answers[profile.careerId]?.rating || profile.currentRating) - profile.currentRating;
+  }
+
+  function profileById(careerId) {
+    return profiles.find((profile) => profile.careerId === careerId);
+  }
+
+  function primaryPosition(profile) {
+    return profile.positions[0] || "unknown";
+  }
+
+  function searchableText(profile) {
+    return `${profile.name} ${profile.positions.join(" ")} ${profile.clubs.join(" ")} ${profile.currentRating}`.toLowerCase();
+  }
+
+  function ratingTier(value) {
+    return BUCKETS.find((bucket) => value >= bucket.min && value <= bucket.max)?.label || "Unknown";
+  }
+
+  function ratingClass(value) {
+    if (value >= 100) return "rating-immortal";
+    if (value >= 90) return "rating-red";
+    if (value >= 85) return "rating-orange";
+    if (value >= 80) return "rating-yellow";
+    if (value >= 75) return "rating-green";
+    if (value >= 70) return "rating-blue";
+    return "rating-grey";
+  }
+
+  function deltaClass(delta) {
+    if (delta === "") return "";
+    if (delta > 0) return "positive";
+    if (delta < 0) return "negative";
+    return "";
+  }
+
+  function signed(value) {
+    return Number(value) > 0 ? `+${value}` : String(value);
+  }
+
+  function saveAnswers() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.answers));
   }
 
   function saveBatch() {
     localStorage.setItem(BATCH_KEY, JSON.stringify(state.batchIds));
-  }
-
-  function normaliseStore(store) {
-    const seasons = store.seasons || {};
-    const careers = store.careers || {};
-    let changed = false;
-
-    Object.values(seasons).forEach((override) => {
-      if (!override?.careerId || !Array.isArray(override.positions) || careers[override.careerId]) return;
-      const basePositions = override.basePositions || [];
-      careers[override.careerId] = {
-        careerId: override.careerId,
-        name: override.name,
-        basePositions,
-        baseCoverPositions: override.baseCoverPositions || deriveCoverPositions(basePositions),
-        positions: sortPositions(override.positions),
-        coverPositions: sortPositions(override.coverPositions || deriveCoverPositions(override.positions)),
-        updatedAt: override.updatedAt || new Date().toISOString()
-      };
-      delete override.positions;
-      delete override.coverPositions;
-      delete override.basePositions;
-      changed = true;
-    });
-
-    for (const [seasonKey, override] of Object.entries(seasons)) {
-      const profile = profileMap.get(seasonKey);
-      if (!profile || !override?.ratings) {
-        delete seasons[seasonKey];
-        changed = true;
-        continue;
-      }
-
-      const hasRatingChange = RATING_KEYS.some((key) => Number(override.ratings[key]) !== Number(profile.ratings[key]));
-      if (!hasRatingChange && !String(override.notes || "").trim()) {
-        delete seasons[seasonKey];
-        changed = true;
-      }
-    }
-
-    for (const [careerId, override] of Object.entries(careers)) {
-      const rows = profilesByCareer.get(careerId) || [];
-      if (!rows.length) {
-        delete careers[careerId];
-        changed = true;
-        continue;
-      }
-
-      const positions = sortPositions(override.positions || []);
-      const coverPositions = sortPositions(override.coverPositions || []).filter((position) => !positions.includes(position));
-      const alreadyInDatabase = rows.every((profile) =>
-        samePositions(positions, profile.positions) &&
-        samePositions(coverPositions, profile.coverPositions || deriveCoverPositions(profile.positions || []))
-      );
-
-      if (alreadyInDatabase) {
-        delete careers[careerId];
-        changed = true;
-      }
-    }
-
-    return { store: { seasons, careers }, changed };
   }
 
   function loadJson(key, fallback) {
@@ -650,16 +485,29 @@
     }
   }
 
+  function csvCell(value) {
+    const text = String(value ?? "");
+    return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+  }
+
+  function showExport(title, text, status) {
+    elements.exportPanel.hidden = false;
+    elements.exportTitle.textContent = title;
+    elements.exportStatus.textContent = status;
+    elements.exportText.value = text;
+    elements.exportPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   async function copyText(text) {
     if (navigator.clipboard?.writeText) {
       try {
         await Promise.race([
           navigator.clipboard.writeText(text),
-          new Promise((_, reject) => window.setTimeout(() => reject(new Error("Clipboard timed out")), 1000))
+          new Promise((_, reject) => window.setTimeout(() => reject(new Error("Clipboard timed out")), 900))
         ]);
         return true;
       } catch {
-        // Fall through to selected-text fallback.
+        // Fall through to the selected-text fallback.
       }
     }
 
@@ -679,6 +527,7 @@
   function downloadText(text, filename, type) {
     const link = document.createElement("a");
     link.download = filename;
+
     try {
       const blob = new Blob([text], { type });
       const url = URL.createObjectURL(blob);
@@ -701,74 +550,12 @@
     }
   }
 
-  function showExport(title, text, status) {
-    elements.exportPanel.hidden = false;
-    elements.exportTitle.textContent = title;
-    elements.exportStatus.textContent = status;
-    elements.exportText.value = text;
-    elements.exportPanel.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
   function flashButton(button, text) {
     const original = button.textContent;
     button.textContent = text;
     window.setTimeout(() => {
       button.textContent = original;
     }, 1200);
-  }
-
-  function positionLabel(position) {
-    return POSITION_LABELS[position] || position;
-  }
-
-  function sortPositions(positions) {
-    const unique = [...new Set(positions.filter((position) => POSITION_KEYS.includes(position)))];
-    return unique.sort((a, b) => POSITION_KEYS.indexOf(a) - POSITION_KEYS.indexOf(b));
-  }
-
-  function deriveCoverPositions(primaryPositions) {
-    const coverMap = {
-      fullback: ["wing", "centre"],
-      wing: ["fullback", "centre"],
-      centre: ["wing", "fullback"],
-      edge: ["middle", "lock"],
-      middle: ["edge", "lock"],
-      lock: ["middle", "edge"]
-    };
-    return sortPositions(POSITION_KEYS.filter((slotKey) =>
-      !primaryPositions.includes(slotKey) &&
-      (coverMap[slotKey] || []).some((position) => primaryPositions.includes(position))
-    ));
-  }
-
-  function samePositions(left, right) {
-    const a = sortPositions(left || []);
-    const b = sortPositions(right || []);
-    return a.length === b.length && a.every((position, index) => position === b[index]);
-  }
-
-  function ratingClass(value) {
-    if (value >= 90) return "r90";
-    if (value >= 85) return "r85";
-    if (value >= 80) return "r80";
-    if (value >= 75) return "r75";
-    if (value >= 70) return "r70";
-    return "rLow";
-  }
-
-  function deltaClass(delta) {
-    if (delta > 0) return "positive";
-    if (delta < 0) return "negative";
-    return "";
-  }
-
-  function signed(value) {
-    return Number(value) > 0 ? `+${value}` : String(value);
-  }
-
-  function csvCell(value) {
-    const text = String(value ?? "");
-    return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
   }
 
   function shuffle(items) {
@@ -782,15 +569,6 @@
 
   function clamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
-  }
-
-  function slug(value) {
-    return String(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  }
-
-  function cssEscape(value) {
-    if (window.CSS?.escape) return window.CSS.escape(value);
-    return String(value).replace(/["\\]/g, "\\$&");
   }
 
   function escapeHtml(value) {
