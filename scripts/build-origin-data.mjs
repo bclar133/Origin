@@ -12,16 +12,16 @@ const MATCH_URL = "https://www.rugbyleagueproject.org/matches/";
 const USER_AGENT = "Mozilla/5.0 (compatible; NRL Invincible data builder)";
 
 const IMMORTAL_WILDCARDS = [
-  player("Clive Churchill", ["fullback", "centre"], ratings(100, 100, 96, 96, 82, 88, 100), "Immortal wildcard"),
-  player("Bob Fulton", ["centre", "half"], ratings(100, 100, 94, 96, 88, 74, 100), "Immortal wildcard"),
-  player("Reg Gasnier", ["centre"], ratings(100, 100, 94, 94, 58, 70, 100), "Immortal wildcard"),
-  player("Johnny Raper", ["lock"], ratings(100, 96, 100, 100, 42, 20, 100), "Immortal wildcard"),
-  player("Graeme Langlands", ["fullback", "centre"], ratings(100, 99, 95, 96, 86, 94, 100), "Immortal wildcard"),
-  player("Dave Brown", ["centre", "wing", "half"], ratings(100, 100, 92, 94, 78, 92, 100), "Immortal wildcard"),
-  player("Frank Burge", ["edge", "middle", "lock"], ratings(100, 98, 98, 99, 36, 20, 100), "Immortal wildcard"),
-  player("Dally Messenger", ["centre", "wing", "half"], ratings(100, 100, 94, 95, 94, 100, 100), "Immortal wildcard"),
-  player("Norm Provan", ["edge", "middle"], ratings(100, 96, 99, 100, 30, 18, 100), "Immortal wildcard"),
-  player("Ron Coote", ["lock", "edge"], ratings(100, 96, 100, 100, 44, 18, 100), "Immortal wildcard")
+  immortal("Clive Churchill", ["fullback", "centre"], ratings(100, 100, 96, 96, 82, 88, 100), "NSW"),
+  immortal("Bob Fulton", ["centre", "half"], ratings(100, 100, 94, 96, 88, 74, 100), "NSW"),
+  immortal("Reg Gasnier", ["centre"], ratings(100, 100, 94, 94, 58, 70, 100), "NSW"),
+  immortal("Johnny Raper", ["lock"], ratings(100, 96, 100, 100, 42, 20, 100), "NSW"),
+  immortal("Graeme Langlands", ["fullback", "centre"], ratings(100, 99, 95, 96, 86, 94, 100), "NSW"),
+  immortal("Dave Brown", ["centre", "wing", "half"], ratings(100, 100, 92, 94, 78, 92, 100), "NSW"),
+  immortal("Frank Burge", ["edge", "middle", "lock"], ratings(100, 98, 98, 99, 36, 20, 100), "NSW"),
+  immortal("Dally Messenger", ["centre", "wing", "half"], ratings(100, 100, 94, 95, 94, 100, 100), "NSW"),
+  immortal("Norm Provan", ["edge", "middle"], ratings(100, 96, 99, 100, 30, 18, 100), "NSW"),
+  immortal("Ron Coote", ["lock", "edge"], ratings(100, 96, 100, 100, 44, 18, 100), "NSW")
 ];
 
 const NAME_BONUS = new Map(Object.entries({
@@ -520,6 +520,10 @@ function ratings(overall, attack, defence, workrate, kicking, goalKicking, bigGa
 
 function player(name, positions, playerRatings, role = "") {
   return { name, positions, ratings: playerRatings, role };
+}
+
+function immortal(name, positions, playerRatings, originState) {
+  return { ...player(name, positions, playerRatings, "Immortal wildcard"), originState };
 }
 
 function cleanText(html = "") {

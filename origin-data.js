@@ -32080,7 +32080,8 @@ window.ORIGIN_INVINCIBLE_DATA = {
         "goalKicking": 88,
         "bigGame": 100
       },
-      "role": "Immortal wildcard"
+      "role": "Immortal wildcard",
+      "originState": "NSW"
     },
     {
       "name": "Bob Fulton",
@@ -32097,7 +32098,8 @@ window.ORIGIN_INVINCIBLE_DATA = {
         "goalKicking": 74,
         "bigGame": 100
       },
-      "role": "Immortal wildcard"
+      "role": "Immortal wildcard",
+      "originState": "NSW"
     },
     {
       "name": "Reg Gasnier",
@@ -32113,7 +32115,8 @@ window.ORIGIN_INVINCIBLE_DATA = {
         "goalKicking": 70,
         "bigGame": 100
       },
-      "role": "Immortal wildcard"
+      "role": "Immortal wildcard",
+      "originState": "NSW"
     },
     {
       "name": "Johnny Raper",
@@ -32129,7 +32132,8 @@ window.ORIGIN_INVINCIBLE_DATA = {
         "goalKicking": 20,
         "bigGame": 100
       },
-      "role": "Immortal wildcard"
+      "role": "Immortal wildcard",
+      "originState": "NSW"
     },
     {
       "name": "Graeme Langlands",
@@ -32146,7 +32150,8 @@ window.ORIGIN_INVINCIBLE_DATA = {
         "goalKicking": 94,
         "bigGame": 100
       },
-      "role": "Immortal wildcard"
+      "role": "Immortal wildcard",
+      "originState": "NSW"
     },
     {
       "name": "Dave Brown",
@@ -32164,7 +32169,8 @@ window.ORIGIN_INVINCIBLE_DATA = {
         "goalKicking": 92,
         "bigGame": 100
       },
-      "role": "Immortal wildcard"
+      "role": "Immortal wildcard",
+      "originState": "NSW"
     },
     {
       "name": "Frank Burge",
@@ -32182,7 +32188,8 @@ window.ORIGIN_INVINCIBLE_DATA = {
         "goalKicking": 20,
         "bigGame": 100
       },
-      "role": "Immortal wildcard"
+      "role": "Immortal wildcard",
+      "originState": "NSW"
     },
     {
       "name": "Dally Messenger",
@@ -32200,7 +32207,8 @@ window.ORIGIN_INVINCIBLE_DATA = {
         "goalKicking": 100,
         "bigGame": 100
       },
-      "role": "Immortal wildcard"
+      "role": "Immortal wildcard",
+      "originState": "NSW"
     },
     {
       "name": "Norm Provan",
@@ -32217,7 +32225,8 @@ window.ORIGIN_INVINCIBLE_DATA = {
         "goalKicking": 18,
         "bigGame": 100
       },
-      "role": "Immortal wildcard"
+      "role": "Immortal wildcard",
+      "originState": "NSW"
     },
     {
       "name": "Ron Coote",
@@ -32234,7 +32243,8 @@ window.ORIGIN_INVINCIBLE_DATA = {
         "goalKicking": 18,
         "bigGame": 100
       },
-      "role": "Immortal wildcard"
+      "role": "Immortal wildcard",
+      "originState": "NSW"
     }
   ],
   "calibratedAt": "2026-06-19T08:40:49.338Z",
