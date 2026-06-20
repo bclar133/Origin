@@ -205,7 +205,6 @@ function renderStateChoice() {
       <div>
         <h1>Origin Invincible</h1>
         <p class="subtle">Pick your state, build an all-era Origin XIII, and try to win a three-game series without conceding a point.</p>
-        <a class="calibration-link" href="rating-calibration.html">Rating calibration</a>
       </div>
       <div class="state-grid">
         <button class="state-card qld-card" data-action="choose-state" data-state="QLD">

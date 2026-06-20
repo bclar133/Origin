@@ -151,20 +151,6 @@ h1 {
   gap: 14px;
 }
 
-.calibration-link {
-  display: inline-flex;
-  margin-top: 12px;
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 900;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.calibration-link:hover {
-  color: var(--accent-2);
-}
-
 .state-card {
   min-height: 220px;
   padding: 22px;
