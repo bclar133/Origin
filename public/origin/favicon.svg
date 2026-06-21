@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Origin Invincible">
-  <rect width="64" height="64" rx="14" fill="#07100c" />
-  <path d="M32 7 53 17v16c0 13.6-8 21.6-21 25C19 54.6 11 46.6 11 33V17L32 7Z" fill="#7b2334" />
-  <path d="M32 7 53 17v16c0 13.6-8 21.6-21 25V7Z" fill="#70c8f2" />
-  <path d="M17 31h30M20 21h24M22 41h20" stroke="#ffffff" stroke-opacity=".42" stroke-width="2" />
-  <ellipse cx="32" cy="34" rx="10" ry="6" fill="#f4fff7" transform="rotate(-18 32 34)" />
-  <path d="M27 34h10M32 29v10" stroke="#122018" stroke-width="1.6" stroke-linecap="round" />
-  <path d="M32 7 53 17v16c0 13.6-8 21.6-21 25C19 54.6 11 46.6 11 33V17L32 7Z" fill="none" stroke="#ffd45d" stroke-width="2" />
-</svg>
